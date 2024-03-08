@@ -8,7 +8,7 @@ type propType = {
 const AppLayout = (prop: propType) => {
     const { children } = prop
     return (
-        <div className="bg-gray-100">
+        <div className="dark:bg-black bg-gray-100">
             <Navigations />
             {children}
             <MobileNavigations />
