@@ -15,13 +15,14 @@ const SurahDetail = () => {
             if (id !== undefined) {
                 try {
                     const surah = await SurahService.getDetailsSurah(id);
-                    console.log(surah);
                     setDetailSurah(surah.data.data);
                 } catch (error) {
                     console.error('Error fetching data:', error);
                 }
             }
         }
+
+        fetchData(id as string);
     }, [id])
 
     // useEffect(() => {
