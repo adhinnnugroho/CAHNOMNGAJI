@@ -1,6 +1,7 @@
 import AppLayout from "@/Layout/App"
 import SurahService from "@/Services/Surah"
 import Image from "next/image"
+import Link from "next/link"
 import { useEffect, useState } from "react"
 
 const HomeScreen = () => {
@@ -51,23 +52,27 @@ const HomeScreen = () => {
                 <div className="grid grid-cols-1 gap-5 ml-2 mr-2 mt-10 pb-16">
                     {surah && surah.map((surah: any, index: number) => {
                         return (
-                            <div className="col-span-1" key={index}>
-                                <div className="flex">
-                                    <div className="text-2xl mb-6" >
-                                        <Image src={"/img/number_icons.png"}
-                                            width={330}
-                                            height={60}
-                                            alt="ramadhan"
-                                            className="w-16" />
-                                        <div className="-mt-[45px] text-center text-xl">
-                                            {surah.nomor}
+                            <div key={index}>
+                                <Link href={`/surah/${surah.nomor}`}>
+                                    <div className="col-span-1">
+                                        <div className="flex">
+                                            <div className="text-2xl mb-6" >
+                                                <Image src={"/img/number_icons.png"}
+                                                    width={330}
+                                                    height={60}
+                                                    alt="ramadhan"
+                                                    className="w-16" />
+                                                <div className="-mt-[45px] text-center text-xl">
+                                                    {surah.nomor}
+                                                </div>
+                                            </div>
+                                            <div className="text-2xl ml-5">
+                                                {surah.namaLatin} <br />
+                                                {surah.arti}
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className="text-2xl ml-5">
-                                        {surah.namaLatin} <br />
-                                        {surah.arti}
-                                    </div>
-                                </div>
+                                </Link>
                             </div>
                         )
                     })}
