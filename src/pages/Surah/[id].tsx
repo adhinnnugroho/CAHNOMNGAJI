@@ -23,27 +23,8 @@ const SurahDetail = () => {
         }
 
         fetchData(id as string);
-    }, [id])
+    })
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         if (SurahId !== undefined) {
-    //             const id = parseInt(SurahId);
-    //             if (!isNaN(id)) {
-    //                 try {
-    //                     const surah = await SurahService.getDetailsSurah(id);
-    //                     setDetailSurah(surah.data.data);
-    //                 } catch (error) {
-    //                     console.error('Error fetching data:', error);
-    //                 }
-    //             }
-    //         }
-    //     };
-
-    //     fetchData();
-    // }, [SurahId]);
-
-    // console.log(detailSurah);
 
     return (
         <div>
@@ -52,17 +33,17 @@ const SurahDetail = () => {
                 {detailSurah && detailSurah.map((surah: any, index: number) => {
                     return (
                         <div key={index}>
-                            <Link href={`/surah/${surah.nomor}`}>
+                            <Link href={`/surah/${surah.nomorAyat}`}>
                                 <div className="col-span-1">
                                     <div className="flex">
                                         <div className="text-2xl mb-6" >
                                             <div className="-mt-[45px] text-center text-xl">
-                                                {surah.nomor}
+                                                {surah.nomorAyat}
                                             </div>
                                         </div>
                                         <div className="text-2xl ml-5">
-                                            {surah.namaLatin} <br />
-                                            {surah.arti}
+                                            {surah.teksArab} <br />
+                                            {surah.teksLatin}
                                         </div>
                                     </div>
                                 </div>

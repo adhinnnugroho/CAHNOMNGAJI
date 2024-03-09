@@ -17,7 +17,7 @@ export default async function handler(
                     status: true,
                     statusCode: 200,
                     message: "Surah retrieved data successfully",
-                    data: DetailsSurah.data.data
+                    data: DetailsSurah.data.data.ayat
                 })
             }else{
                 const Surah = await retrieveData();
