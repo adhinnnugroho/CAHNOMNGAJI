@@ -4,6 +4,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
+// Penjelasan nama file 
+// kenapa nama filenya [id].tsx?
+// karena di next.js itu tidak bisa seperti di laravel yang langsung bisa di ambil jika kita set parameter melalui url
+// di next.js itu ada namanya Dynamic Routes untuk menggunakan Dynamic Routes harus menggunakan [namafile] 
+// kalau enggak pakai [] maka kita tidak bisa get semua parameter yang dikirim via url
 
 const SurahDetail = () => {
     const { id } = useRouter().query;
