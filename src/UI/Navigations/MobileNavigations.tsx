@@ -13,6 +13,9 @@ const MobileNavigations = () => {
         // Ubah tema tergantung pada tema yang sedang aktif
         theme === "dark" ? setTheme('light') : setTheme("dark");
     };
+
+    const themeIcon = currentTheme === "dark" ? "bx bx-sun" : "bx bx-moon";
+    
     return (
         <nav className="dark:bg-black bg-gray-300 shadow-sm fixed bottom-0 w-full h-14">
             <div className="mx-auto max-w-7xl mt-2">
@@ -33,7 +36,7 @@ const MobileNavigations = () => {
                             link="/Profile" />
                     </div>
                     <div className="col-span-1 text-center">
-                        <i className={`bx ${theme === "dark" ? 'bx-moon' : 'bx-sun'} text-4xl mr-5 cursor-pointer`} onClick={toggleTheme}></i>
+                        <i className={`${themeIcon} text-4xl mr-5 cursor-pointer`} onClick={toggleTheme}></i>
                     </div>
                 </div>
             </div>
