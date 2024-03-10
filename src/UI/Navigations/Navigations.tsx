@@ -10,9 +10,9 @@ const Navigations = () => {
                         </div>
                     </div>
 
-                    <div className="justify-end">
+                    {/* <div className="justify-end">
                         <i className='bx bx-search text-3xl mt-1 mr-2'></i>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </nav>

@@ -29,21 +29,6 @@ const SurahDetail = () => {
     // Function to handle audio playback for a specific verse
     const handleAudioPlayback = (index: number) => {
         const audioPlayer = document.getElementById(`audio-${index}`) as HTMLAudioElement; // Get the audio element
-
-        // if (playingIndex === index) {
-        //     // If the same verse is clicked again, toggle between play and pause
-        //     if (audioPlayer.paused) {
-        //         audioPlayer.play(); 
-        //         setPlayingIndex(index);// Start playback
-        //     } else {
-        //         audioPlayer.pause(); // Pause playback
-        //         setPlayingIndex(-1);
-        //     }
-        // } else {
-        //     setPlayingIndex(index);
-        //     audioPlayer.play();
-        // }
-
         if (playingIndex === index) {
             // If the same verse is clicked again, toggle between play and pause
             if (audioPlayer.paused) {
@@ -101,7 +86,7 @@ const SurahDetail = () => {
                                                 </div>
                                             </div>
                                             <div className="flex items-center">
-                                                <div className="text-right">
+                                                <div className="text-right text-purple-600">
                                                     <div className="flex flex-wrap ">
                                                         <audio id={`audio-${index}`} src={surah.audio["02"]} controls className='hidden'></audio>
                                                         {playingIndex === index ? (
