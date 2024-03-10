@@ -32,16 +32,32 @@ const SurahDetail = () => {
 
     return (
         <div>
-            <BackNavigations SurahName={surah && surah.namaLatin} link="/Home"/>
+            <BackNavigations SurahName={surah && surah.namaLatin} link="/Home" />
 
-            <div className="ml-2 mr-2 mt-10">
+            <div className="ml-3 mr-3 mt-10 mb-72">
                 <Image src={"/img/details_surah.png"}
                     width={330}
                     height={60}
                     alt="ramadhan"
                     className="w-screen" />
+
+                <div className="text-3xl text-white font-bold  text-center -mt-64">
+                    {surah && surah.namaLatin}
+                </div>
+                <div className="text-3xl text-white font-semibold  text-center mt-2 ">
+                    {surah.arti}
+                </div>
+                <div className="text-3xl text-white font-semibold border-t-2 border-white text-center mt-5 pt-2
+                relative z-10 w-[20rem] items-center justify-center mx-auto">
+                    {surah.tempatTurun} . {surah.jumlahAyat} Ayat
+                </div>
+                <Image src={"/img/bismillah.png"}
+                    width={330}
+                    height={60}
+                    alt="ramadhan"
+                    className="w-64 mx-auto mt-5" />
             </div>
-            <div className="grid grid-cols-1 gap-5 ml-2 mr-2 mt-10 pb-16">
+            {/* <div className="grid grid-cols-1 gap-5 ml-2 mr-2 mt-10 pb-16">
                 {detailSurah && detailSurah.map((surah: any, index: number) => {
                     return (
                         <div key={index}>
@@ -63,7 +79,7 @@ const SurahDetail = () => {
                         </div>
                     )
                 })}
-            </div>
+            </div> */}
         </div>
     );
 };
