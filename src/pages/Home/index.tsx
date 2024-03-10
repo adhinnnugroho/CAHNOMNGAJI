@@ -53,7 +53,7 @@ const HomeScreen = () => {
                     {surah && surah.map((surah: any, index: number) => {
                         return (
                             <div key={index}>
-                                <Link href={`/surah/${surah.nomor}`}>
+                                <Link href={`/Surah/${surah.nomor}`}>
                                     <div className="col-span-1">
                                         <div className="flex">
                                             <div className="text-2xl mb-6" >
