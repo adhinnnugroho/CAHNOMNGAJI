@@ -1,8 +1,8 @@
 import SurahService from '@/Services/Surah';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Image from "next/image";
 import BackNavigations from '@/UI/Navigations/BackNavigations';
+import SurahDetails from '@/Components/Card/SurahDetails';
 
 const SurahDetail = () => {
     const { id } = useRouter().query;
@@ -56,21 +56,8 @@ const SurahDetail = () => {
     return (
         <div>
             <BackNavigations SurahName={surah && surah.namaLatin} link="/Home" />
-
-            <div className="ml-3 mr-3 mt-10 mb-28">
-                <Image src={"/img/details_surah.png"} width={330} height={60} alt="ramadhan" className="w-screen" />
-
-                <div className="text-3xl text-white font-bold  text-center -mt-64">
-                    {surah && surah.namaLatin}
-                </div>
-                <div className="text-3xl text-white font-semibold  text-center mt-2 ">
-                    {surah.arti}
-                </div>
-                <div className="text-3xl text-white font-semibold border-t-2 border-white text-center mt-5 pt-2 relative z-10 w-[20rem] items-center justify-center mx-auto">
-                    {surah.tempatTurun} . {surah.jumlahAyat} Ayat
-                </div>
-                <Image src={"/img/bismillah.png"} width={330} height={60} alt="ramadhan" className="w-64 mx-auto mt-5" />
-            </div>
+            <SurahDetails nameSurah={surah && surah.namaLatin} ayat={surah && surah.jumlahAyat} 
+            arti={surah && surah.arti}  tempatTurun={surah && surah.tempatTurun} />
 
             <div className="grid grid-cols-1 gap-5 ml-3 mr-3 pb-6">
                 {detailSurah && detailSurah.map((surah: any, index: number) => {
@@ -94,7 +81,6 @@ const SurahDetail = () => {
                                                         ) : (
                                                             <i className='bx bx-play text-4xl' onClick={() => handleAudioPlayback(index)}></i>
                                                         )}
-                                                        <i className='bx bx-bookmark text-3xl'></i>
                                                     </div>
                                                 </div>
                                             </div>
