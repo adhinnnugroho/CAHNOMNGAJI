@@ -26,6 +26,33 @@ const SurahDetail = () => {
         fetchData(id as string);
     }, [id]); // Make sure to include 'id' as a dependency
 
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            if (detailSurah.length > 0 && surah) {
+                const lastReadData = {
+                    surahId: surah.id,
+                    surahName: surah.namaLatin,
+                    lastReadTime: new Date().getTime()
+                };
+
+                // Check if lastRead exists in localStorage
+                const lastRead = localStorage.getItem('lastRead');
+                if (lastRead) {
+                    const lastReadParsed = JSON.parse(lastRead);
+                    // Check if the accessed surah is the same as the last read surah
+                    if (lastReadParsed.surahId === surah.id) {
+                        // Update lastReadData with the latest accessed surah data
+                        localStorage.setItem('lastRead', JSON.stringify(lastReadData));
+                    }
+                } else {
+                    localStorage.setItem('lastRead', JSON.stringify(lastReadData));
+                }
+            }
+        }, 50000); // Set timeout for 50 seconds
+
+        return () => clearTimeout(timeout); // Clear timeout on component unmount
+    }, [detailSurah, surah]);
+
     // Function to handle audio playback for a specific verse
     const handleAudioPlayback = (index: number) => {
         const audioPlayer = document.getElementById(`audio-${index}`) as HTMLAudioElement; // Get the audio element
@@ -56,7 +83,7 @@ const SurahDetail = () => {
     return (
         <div>
             <BackNavigations SurahName={surah && surah.namaLatin} link="/Home" />
-            <SurahDetails nameSurah={surah && surah.namaLatin} ayat={surah && surah.jumlahAyat} arti={surah && surah.arti} 
+            <SurahDetails nameSurah={surah && surah.namaLatin} ayat={surah && surah.jumlahAyat} arti={surah && surah.arti}
                 tempatTurun={surah && surah.tempatTurun} />
 
             <div className="grid grid-cols-1 gap-5 ml-3 mr-3 pb-6">
