@@ -24,7 +24,7 @@ const HomeScreen = () => {
             <div className="mt-5 ml-5 font-semibold text-2xl">
                 Asslamualaikum
             </div>
-            <div className="ml-2 mr-2 mt-10">
+            <div className="ml-4 mr-4 mt-10">
                 <Image src={"/img/last_read.png"}
                     width={330}
                     height={60}
@@ -32,7 +32,7 @@ const HomeScreen = () => {
                     className="w-screen" />
             </div>
 
-            <div className="mt-5 ml-3 mb-5">
+            <div className="mt-5 ml-4 mr-4 mb-5">
                 <div className="grid grid-cols-4 gap-7">
                     <div className="col-span-1 text-2xl text-purple-600 border-2 dark:border-black border-gray-100 
                     dark:border-b-purple-600 border-b-purple-600 font-bold">

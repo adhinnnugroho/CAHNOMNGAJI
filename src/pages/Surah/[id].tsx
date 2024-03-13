@@ -56,10 +56,8 @@ const SurahDetail = () => {
     return (
         <div>
             <BackNavigations SurahName={surah && surah.namaLatin} link="/Home" />
-            <SurahDetails nameSurah={surah && surah.namaLatin} ayat={surah && surah.jumlahAyat} 
-            arti={surah && surah.arti}  tempatTurun={surah && surah.tempatTurun} />
-
-            
+            <SurahDetails nameSurah={surah && surah.namaLatin} ayat={surah && surah.jumlahAyat} arti={surah && surah.arti} 
+                tempatTurun={surah && surah.tempatTurun} />
 
             <div className="grid grid-cols-1 gap-5 ml-3 mr-3 pb-6">
                 {detailSurah && detailSurah.map((surah: any, index: number) => {
