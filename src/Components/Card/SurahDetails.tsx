@@ -8,11 +8,13 @@ type PropsType = {
     'tempatTurun': string,
 }
 
+const DetailSurahBackground = '/img/details_surah.png'
+
 const SurahDetails = (prop: PropsType) => {
     const { children, nameSurah, ayat, arti, tempatTurun } = prop
     return (
         <div className="ml-3 mr-3 mt-10 mb-28">
-            <Image src={"/img/details_surah.png"} width={330} height={60} alt="ramadhan" className="w-screen" />
+            <Image src={DetailSurahBackground} width={330} height={60} alt="ramadhan" className="w-screen" />
             <div className="text-3xl text-white font-bold  text-center -mt-64">
                 {nameSurah}
             </div>

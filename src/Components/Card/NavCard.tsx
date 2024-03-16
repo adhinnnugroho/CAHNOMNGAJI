@@ -33,6 +33,8 @@ const NavCard = (prop: PropsType) => {
                 </Link>
             </div>
         )
+    } else {
+        return null;
     }
 }
 

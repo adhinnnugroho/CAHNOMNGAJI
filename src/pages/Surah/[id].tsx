@@ -3,12 +3,13 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import BackNavigations from '@/UI/Navigations/BackNavigations';
 import SurahDetails from '@/Components/Card/SurahDetails';
+import MobileNavigations from '@/UI/Navigations/MobileNavigations';
 
 const SurahDetail = () => {
     const { id } = useRouter().query;
     const [detailSurah, setDetailSurah] = useState([]);
     const [surah, setSurah] = useState<any>([]);
-    const [playingIndex, setPlayingIndex] = useState(-1); // State to track the index of the currently playing verse
+    const [playingIndex, setPlayingIndex] = useState(-1);
 
     useEffect(() => {
         const fetchData = async (id: string) => {
@@ -22,54 +23,35 @@ const SurahDetail = () => {
                 }
             }
         };
-
         fetchData(id as string);
-    }, [id]); // Make sure to include 'id' as a dependency
+    }, [id]);
 
     useEffect(() => {
-        const timeout = setTimeout(() => {
-            if (detailSurah.length > 0 && surah) {
-                const lastReadData = {
-                    surahId: surah.id,
-                    surahName: surah.namaLatin,
-                    lastReadTime: new Date().getTime()
-                };
+        const saveLastRead = () => {
+            const lastReadData = {
+                surahId: id,
+                surahName: surah.namaLatin,
+                lastReadTime: new Date().getTime()
+            };
+            localStorage.setItem('lastRead', JSON.stringify(lastReadData));
+            const timeout = setTimeout(saveLastRead, 5000);
+            return () => clearTimeout(timeout);
+        };
+    });
 
-                // Check if lastRead exists in localStorage
-                const lastRead = localStorage.getItem('lastRead');
-                if (lastRead) {
-                    const lastReadParsed = JSON.parse(lastRead);
-                    // Check if the accessed surah is the same as the last read surah
-                    if (lastReadParsed.surahId === surah.id) {
-                        // Update lastReadData with the latest accessed surah data
-                        localStorage.setItem('lastRead', JSON.stringify(lastReadData));
-                    }
-                } else {
-                    localStorage.setItem('lastRead', JSON.stringify(lastReadData));
-                }
-            }
-        }, 50000); // Set timeout for 50 seconds
-
-        return () => clearTimeout(timeout); // Clear timeout on component unmount
-    }, [detailSurah, surah]);
-
-    // Function to handle audio playback for a specific verse
     const handleAudioPlayback = (index: number) => {
-        const audioPlayer = document.getElementById(`audio-${index}`) as HTMLAudioElement; // Get the audio element
+        const audioPlayer = document.getElementById(`audio-${index}`) as HTMLAudioElement;
         if (playingIndex === index) {
-            // If the same verse is clicked again, toggle between play and pause
             if (audioPlayer.paused) {
                 audioPlayer.play();
-                setPlayingIndex(index); // Start playback
+                setPlayingIndex(index);
             } else {
-                audioPlayer.pause(); // Pause playback
+                audioPlayer.pause();
                 setPlayingIndex(-1);
             }
         } else {
             setPlayingIndex(index);
             audioPlayer.play();
-
-            // Automatically play the next verse when current audio ends
             audioPlayer.onended = () => {
                 const nextIndex = index + 1;
                 if (nextIndex < detailSurah.length) {
@@ -77,8 +59,8 @@ const SurahDetail = () => {
                 }
             };
         }
-
     };
+
 
     return (
         <div>
@@ -129,6 +111,7 @@ const SurahDetail = () => {
                     )
                 })}
             </div>
+            <MobileNavigations />
         </div>
     );
 };

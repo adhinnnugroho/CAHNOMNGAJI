@@ -4,6 +4,10 @@ import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 
+
+const LastReadBackground = '/img/last_read.png'
+const SurahNumberBackground = '/img/number_icons.png'
+
 const HomeScreen = () => {
 
     const [surah, setSurah] = useState([])
@@ -31,7 +35,7 @@ const HomeScreen = () => {
                 Asslamualaikum
             </div>
             <div className="ml-4 mr-4 mt-3 mb-32">
-                <Image src={"/img/last_read.png"} width={330} height={60} alt="ramadhan" className="w-screen h-44" />
+                <Image src={LastReadBackground} priority={true} width={330} height={60} alt="ramadhan" className="w-screen h-44" />
                 <div className="flex flex-warp gap-1 -mt-40 ml-3">
                     <i className='bx bx-book-open text-2xl' />
                     <h5 className="text-white  font-semibold text-lg">
@@ -76,7 +80,7 @@ const HomeScreen = () => {
                                     <div className="col-span-1">
                                         <div className="flex">
                                             <div className="text-2xl mb-6">
-                                                <Image src={"/img/number_icons.png"} width={330} height={60} alt="ramadhan"
+                                                <Image src={SurahNumberBackground} width={330} height={60} alt="ramadhan"
                                                     className="w-16" />
                                                 <div className="-mt-[45px] text-center text-xl">
                                                     {surah.nomor}
