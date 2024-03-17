@@ -6,7 +6,7 @@ const Navigations = () => {
                     <div className="justify-start text-2xl font-semibold flex flex-nowrap">
                         <i className='bx bx-menu-alt-left text-4xl mr-2'></i>
                         <div className="dark:text-white text-purple-600">
-                        Quran App
+                            Assalamualaikum wr.wb
                         </div>
                     </div>
 

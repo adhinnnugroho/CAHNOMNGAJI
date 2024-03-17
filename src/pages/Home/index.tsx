@@ -31,9 +31,6 @@ const HomeScreen = () => {
 
     return (
         <AppLayout>
-            <div className="mt-5 ml-5 font-semibold text-2xl">
-                Asslamualaikum
-            </div>
             <div className="ml-4 mr-4 mt-3 mb-32">
                 <Image src={LastReadBackground} priority={true} width={330} height={60} alt="ramadhan" className="w-screen h-44" />
                 <div className="flex flex-warp gap-1 -mt-40 ml-3">
@@ -77,18 +74,29 @@ const HomeScreen = () => {
                         return (
                             <div key={index}>
                                 <Link href={`/Surah/${surah.nomor}`}>
-                                    <div className="col-span-1">
-                                        <div className="flex">
-                                            <div className="text-2xl mb-6">
-                                                <Image src={SurahNumberBackground} width={330} height={60} alt="ramadhan"
-                                                    className="w-16" />
-                                                <div className="-mt-[45px] text-center text-xl">
-                                                    {surah.nomor}
+                                    <div className="col-span-1 border-b pb-1 border-b-gray-500">
+                                        <div className="grid grid-cols-3 gap-4">
+                                            <div className="col-span-2">
+                                                <div className="flex flex-wrap gap-3">
+                                                    <div className="text-2xl mb-4">
+                                                        <Image src={SurahNumberBackground} width={330} height={60} alt="ramadhan"
+                                                            className="w-12" />
+                                                        <div className="-mt-[40px] text-center text-[14px]">
+                                                            {surah.nomor}
+                                                        </div>
+                                                    </div>
+                                                    <div className="block">
+                                                        <h5 className="text-xl font-bold">
+                                                            {surah.namaLatin}
+                                                        </h5>
+                                                        <p className="text-lg">
+                                                            {surah.tempatTurun} ({surah.jumlahAyat})
+                                                        </p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div className="text-2xl ml-5">
-                                                {surah.namaLatin} <br />
-                                                {surah.arti}
+                                            <div className="col-span-1 text-right text-2xl text-purple-500">
+                                                {surah.nama}
                                             </div>
                                         </div>
                                     </div>
