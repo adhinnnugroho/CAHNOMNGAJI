@@ -4,10 +4,16 @@ import { useEffect, useState } from "react";
 const UserLocations = () => {
     const [location, setLocation] = useState<any>(null);
     const [jadwal, setJadwal] = useState<any>(null);
-    const [City, setCity] = useState<any>(null);
-    const GetSpesifikCity = async (latitude: number, longitude: number) => {
+    const [UserLocation, setUserLocation] = useState<any>(null);
+    const [city , setcity] = useState<any>(null);
+    const GetUserLocations = async (latitude: number, longitude: number) => {
         const data = await SholatServices.getUserLocations(latitude, longitude);
-        setCity(data.data.CityData);
+        setUserLocation(data.data.locationData.city);
+    }
+
+    const GetCityId = async (city: string) => {
+        const data = await SholatServices.getCityId(city);
+        setcity(data.data.data);
     }
 
     useEffect(() => {
@@ -20,7 +26,7 @@ const UserLocations = () => {
                 (position) => {
                     const { latitude, longitude } = position.coords;
                     setLocation({ latitude, longitude });
-                    GetSpesifikCity(latitude, longitude);
+                    GetUserLocations(latitude, longitude);
                 },
                 (error) => {
                     console.error(error.message);
@@ -32,6 +38,13 @@ const UserLocations = () => {
         getLocation();
     }, []);
 
+    useEffect(() => {
+        if (UserLocation) {
+            GetCityId(UserLocation.name);
+        }
+    }, [UserLocation]);
+
+
     return (
         <div>
             <h1>User Locations</h1>
@@ -42,9 +55,14 @@ const UserLocations = () => {
                 </div>
             )}
 
-            {City && (
+            {UserLocation && (
                 <div>
-                    <p>City: {City.name}</p>
+                    <p>City: {UserLocation.name}</p>
+                </div>
+            )}
+            {city && (
+                <div>
+                    <p>CityId: {city.id}</p>
                 </div>
             )}
         </div>
@@ -52,3 +70,5 @@ const UserLocations = () => {
 }
 
 export default UserLocations;
+
+
