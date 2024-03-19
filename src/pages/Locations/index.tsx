@@ -1,11 +1,15 @@
 import SholatServices from "@/Services/Sholat";
+import BackNavigations from "@/UI/Navigations/BackNavigations";
+import MobileNavigations from "@/UI/Navigations/MobileNavigations";
 import { useEffect, useState } from "react";
 
 const UserLocations = () => {
     const [location, setLocation] = useState<any>(null);
-    const [jadwal, setJadwal] = useState<any>(null);
+    const [JadwalMonthly, setJadwalMonthly] = useState<any>(null);
+    const [JadwalDaily, setJadwalDaily] = useState<any>(null);
     const [UserLocation, setUserLocation] = useState<any>(null);
-    const [city , setcity] = useState<any>(null);
+    const [CityId, setCityId] = useState<any>(null);
+
     const GetUserLocations = async (latitude: number, longitude: number) => {
         const data = await SholatServices.getUserLocations(latitude, longitude);
         setUserLocation(data.data.locationData.city);
@@ -13,7 +17,18 @@ const UserLocations = () => {
 
     const GetCityId = async (city: string) => {
         const data = await SholatServices.getCityId(city);
-        setcity(data.data.data);
+        setCityId(data.data.data[0].id);
+    }
+
+    const GetScheduleSholatMonthly = async (cityId: number, year: number, month: number) => {
+        const data = await SholatServices.GetScheduleSholatMonthly(cityId, year, month);
+        setJadwalMonthly(data.data.data.jadwal);
+    }
+
+    const GetScheduleSholatDaily = async (cityId: number, year: number, month: number, date: number) => {
+        const data = await SholatServices.GetScheduleSholatDaily(cityId, year, month, date);
+        setJadwalDaily(data.data);
+        console.log(data.data);
     }
 
     useEffect(() => {
@@ -42,29 +57,38 @@ const UserLocations = () => {
         if (UserLocation) {
             GetCityId(UserLocation.name);
         }
-    }, [UserLocation]);
+    });
 
 
+    useEffect(() => {
+        if (CityId) {
+            const currentDate: Date = new Date();
+            const year: number = currentDate.getFullYear();
+            const month: number = currentDate.getMonth() + 1;
+            const DateNow: number = currentDate.getDate();
+            GetScheduleSholatMonthly(CityId, year, month);
+            GetScheduleSholatDaily(CityId, year, month, DateNow);
+        }
+    }, [CityId]);
+
+    console.log(JadwalDaily);
     return (
         <div>
-            <h1>User Locations</h1>
-            {location && (
-                <div>
-                    <p>Latitude: {location.latitude}</p>
-                    <p>Longitude: {location.longitude}</p>
-                </div>
-            )}
-
-            {UserLocation && (
-                <div>
-                    <p>City: {UserLocation.name}</p>
-                </div>
-            )}
-            {city && (
-                <div>
-                    <p>CityId: {city.id}</p>
-                </div>
-            )}
+            <BackNavigations SurahName='' link={'/Home'} />
+            {/* <div className="grid grid-cols-10 gap-5 ml-2 mr-2 mt-10 pb-16">
+                {jadwal && jadwal.map((jadwal: any, index: number) => {
+                    return (
+                        <div key={index}>
+                            <div className="col-span-1 border-b pb-1 border-b-gray-500">
+                                <h5 className="text-center font-semibold">
+                                    {jadwal.tanggal}
+                                </h5>
+                            </div>  
+                        </div>
+                    )
+                })}
+            </div> */}
+            <MobileNavigations />
         </div>
     );
 }

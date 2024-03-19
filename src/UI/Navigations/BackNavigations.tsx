@@ -3,8 +3,8 @@ import Link from "next/link";
 type PropsType = {
     'SurahName': any,
     'link'?: string | URL,
-
 }
+
 
 const BackNavigations = (props: PropsType) => {
     const { SurahName, link } = props;
