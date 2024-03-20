@@ -21,7 +21,7 @@ export default async function handler(
             status: true,
             statusCode: 200,
             message: "retrieved data jadwal daily successfully",
-            data: date
+            data: GetScheduleSholat.data
         });
     } catch (error) {
         console.error("Error while fetching data:", error);
