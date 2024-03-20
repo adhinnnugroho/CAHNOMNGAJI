@@ -31,7 +31,7 @@ const MonthSlider = () => {
             style={{ overflowX: 'scroll', whiteSpace: 'nowrap' }}
         >
             {daysInMonth.map((day, index) => (
-                <div key={index} style={{ display: 'inline-block', margin: '10px', padding: '10px', border: '1px solid #ccc', borderRadius: '5px' }}>
+                <div key={index} className='text-center' style={{ display: 'inline-block', margin: '10px', padding: '10px', border: '1px solid #ccc', borderRadius: '5px' }}>
                     <p>{day.dayName}</p>
                     <p>{day.date.toDateString()}</p>
                 </div>
