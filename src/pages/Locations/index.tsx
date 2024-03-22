@@ -22,6 +22,9 @@ const UserLocations = () => {
     const [CityId, setCityId] = useState<any>(null);
     const [City, setCity] = useState<any>(null);
 
+    const [loading, setLoading] = useState(true);
+
+
     const getUserLocations = async (latitude: number, longitude: number) => {
         const data = await SholatServices.getUserLocations(latitude, longitude);
         setUserLocation(data.data.locationData.city);
@@ -38,6 +41,7 @@ const UserLocations = () => {
         const ScheduleSholat = await SholatServices.getScheduleSholatDaily(cityId, year, month, date);
         const GetDataDailyScheduleSholat = ScheduleSholat.data.data.data;
         setJadwalDaily(GetDataDailyScheduleSholat.jadwal);
+        setLoading(false);
     }
 
     useEffect(() => {
@@ -73,8 +77,13 @@ const UserLocations = () => {
     const BorderScheduleSholat = SystemTheme === "dark" ? "border-gray-500" : "border-gray-200";
 
 
+    const onLoadCallBack = () => {
+        setLoading(true)
+    }
+
+
     return (
-        <div>
+        <div onLoad={onLoadCallBack}>
             <BackNavigations SurahName='' link={'/Home'} />
             <DateSlider />
             <div className={`${ScheduleSholat} mt-10`}>
@@ -91,18 +100,29 @@ const UserLocations = () => {
                         <div className={`text-center text-xl border ${BorderScheduleSholat} border-r-gray-700`}>
                             Waktu Imsak
                             <h5 className="text-3xl font-bold mt-3 mb-3">
-                                {JadwalDaily && JadwalDaily.imsak}
+                                {loading ? (
+                                    <div className="text-gray-400 text-center blur-sm">50:00</div>
+                                ) : (
+                                    JadwalDaily && JadwalDaily.imsak
+                                )
+                                }
                             </h5>
                         </div>
                         <div className=" text-center text-xl ">
                             Waktu Berbuka
                             <h5 className="text-3xl font-bold mt-3 mb-3">
-                                {JadwalDaily && JadwalDaily.maghrib}
+                                {loading ? (
+                                    <div className="text-gray-400 text-center blur-sm">50:00</div>
+                                ) : (
+                                    JadwalDaily && JadwalDaily.maghrib
+                                )
+                                }
                             </h5>
                         </div>
                     </div>
                 </div>
             </div>
+
 
             <div className={`${ScheduleSholat} mt-10`}>
                 <div className="grid grid-cols-1 gap-5 ml-2 mr-2 mt-10 pb-16">
