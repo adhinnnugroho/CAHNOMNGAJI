@@ -127,22 +127,22 @@ const UserLocations = () => {
             <div className={`${ScheduleSholat} mt-10 ml-2 mr-2 rounded-lg mb-20`}>
                 <div className="grid grid-cols-1 gap-5 ml-2 mr-2 mt-10 pb-16">
                     <div className={`border ${BorderScheduleSholatDaily} border-b-gray-300 pb-4 mt-5`}>
-                        <ScheduleCard title="Sholat Subuh" Jadwal={JadwalDaily && JadwalDaily.subuh} />
+                        <ScheduleCard title="Sholat Subuh" Jadwal={loading ? "Loading..." : (JadwalDaily && JadwalDaily.subuh)} />
                     </div>
                     <div className={`border ${BorderScheduleSholatDaily} border-b-gray-300 pb-4`}>
-                        <ScheduleCard title="Sholat Dhuha" Jadwal={JadwalDaily && JadwalDaily.dhuha} />
+                        <ScheduleCard title="Sholat Dhuha" Jadwal={loading ? "Loading..." : (JadwalDaily && JadwalDaily.dhuha)} />
                     </div>
                     <div className={`border ${BorderScheduleSholatDaily} border-b-gray-300 pb-4`}>
-                        <ScheduleCard title="Sholat Dzuhur" Jadwal={JadwalDaily && JadwalDaily.dhuha} />
+                        <ScheduleCard title="Sholat Dzuhur" Jadwal={loading ? "Loading..." : (JadwalDaily && JadwalDaily.dzuhur)} />
                     </div>
                     <div className={`border ${BorderScheduleSholatDaily} border-b-gray-300 pb-4`}>
-                        <ScheduleCard title="Sholat Ashar" Jadwal={JadwalDaily && JadwalDaily.ashar} />
+                        <ScheduleCard title="Sholat Ashar" Jadwal={loading ? "Loading..." : (JadwalDaily && JadwalDaily.ashar)} />
                     </div>
                     <div className={`border ${BorderScheduleSholatDaily} border-b-gray-300 pb-4`}>
-                        <ScheduleCard title="Sholat Maghrib" Jadwal={JadwalDaily && JadwalDaily.maghrib} />
+                        <ScheduleCard title="Sholat Maghrib" Jadwal={loading ? "Loading..." : (JadwalDaily && JadwalDaily.maghrib)} />
                     </div>
                     <div className={`border ${BorderScheduleSholatDaily} border-b-gray-300 pb-4`}>
-                        <ScheduleCard title="Sholat Isya" Jadwal={JadwalDaily && JadwalDaily.isya} />
+                        <ScheduleCard title="Sholat Isya" Jadwal={loading ? "Loading..." : (JadwalDaily && JadwalDaily.isya)} />
                     </div>
                 </div>
             </div>
