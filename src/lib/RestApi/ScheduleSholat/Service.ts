@@ -1,4 +1,5 @@
 import instance from "@/lib/axios/instance";
+
 export async function retrieveDataSpecificNameCity(latitude: number, longitude: number) {
     const SpecificCityName = await instance.get(`${process.env.REST_API_URL_CITY}?latitude=${latitude}&longitude=${longitude}`);
     return SpecificCityName;

@@ -4,12 +4,19 @@ import BackNavigations from "@/UI/Navigations/BackNavigations";
 import MobileNavigations from "@/UI/Navigations/MobileNavigations";
 import DateSlider from "@/UI/Date/DateSlider";
 import { useTheme } from "next-themes";
-import { useRouter } from "next/router";
 import ScheduleCard from "@/Components/Card/ScheduleCard";
 
 const UserLocations = () => {
-    const [location, setLocation] = useState<any>(null);
-    const [JadwalMonthly, setJadwalMonthly] = useState<any>(null);
+    const { systemTheme, theme } = useTheme();
+    const currentDate: Date = new Date();
+
+    const GetDate = {
+        'day': currentDate.getDate(),
+        'month': currentDate.getMonth() + 1,
+        'year': currentDate.getFullYear()
+    };
+
+    const [SystemTheme, setSystemTheme] = useState<any>(null);
     const [JadwalDaily, setJadwalDaily] = useState<any>(null);
     const [UserLocation, setUserLocation] = useState<any>(null);
     const [CityId, setCityId] = useState<any>(null);
@@ -27,11 +34,6 @@ const UserLocations = () => {
         setCityId(GetCityData.id);
     }
 
-    const getScheduleSholatMonthly = async (cityId: number, year: number, month: number) => {
-        const data = await SholatServices.getScheduleSholatMonthly(cityId, year, month);
-        setJadwalMonthly(data.data.data.jadwal);
-    }
-
     const getScheduleSholatDaily = async (cityId: number, year: number, month: number, date: number) => {
         const ScheduleSholat = await SholatServices.getScheduleSholatDaily(cityId, year, month, date);
         const GetDataDailyScheduleSholat = ScheduleSholat.data.data.data;
@@ -44,7 +46,6 @@ const UserLocations = () => {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     const { latitude, longitude } = position.coords;
-                    setLocation({ latitude, longitude });
                     getUserLocations(latitude, longitude);
                 },
                 (error) => console.error(error.message),
@@ -58,36 +59,24 @@ const UserLocations = () => {
         if (UserLocation) {
             getCityId(UserLocation.name);
         }
-    }, [UserLocation]);
 
-    useEffect(() => {
         if (CityId) {
-            const currentDate: Date = new Date();
-            const year: number = currentDate.getFullYear();
-            const month: number = currentDate.getMonth() + 1;
-            const DateNow: number = currentDate.getDate();
-            getScheduleSholatMonthly(CityId, year, month);
-            getScheduleSholatDaily(CityId, year, month, DateNow);
+            getScheduleSholatDaily(CityId, GetDate.year, GetDate.month, GetDate.day);
         }
-    }, [CityId]);
 
-    console.log(JadwalDaily);
-    const route = useRouter();
-    const { systemTheme, theme, setTheme } = useTheme();
-    const currentTheme = theme === 'system' ? systemTheme : theme;
-    const toggleTheme = () => {
-        theme === "dark" ? setTheme('light') : setTheme("dark");
-    };
-    const ScheduleSholat = currentTheme === "dark" ? "bg-gray-500" : "bg-gray-100";
-    const BorderScheduleSholat = currentTheme === "dark" ? "border-gray-500" : "border-gray-200";
+        const currentTheme = theme === 'system' ? systemTheme : theme;
+        setSystemTheme(currentTheme);
+
+    }, [CityId, GetDate.year, GetDate.month, GetDate.day, UserLocation, theme, systemTheme]);
+
+    const ScheduleSholat = SystemTheme === "dark" ? "bg-gray-500" : "bg-gray-100";
+    const BorderScheduleSholat = SystemTheme === "dark" ? "border-gray-500" : "border-gray-200";
+
 
     return (
         <div>
             <BackNavigations SurahName='' link={'/Home'} />
             <DateSlider />
-
-
-
             <div className={`${ScheduleSholat} mt-10`}>
                 <div className="flex flex-wrap gap-2 p-3 border-b border-gray-700">
                     <i className='bx bx-current-location text-3xl font-bold'></i>
