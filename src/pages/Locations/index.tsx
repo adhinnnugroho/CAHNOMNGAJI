@@ -75,6 +75,7 @@ const UserLocations = () => {
 
     const ScheduleSholat = SystemTheme === "dark" ? "bg-gray-500" : "bg-gray-100";
     const BorderScheduleSholat = SystemTheme === "dark" ? "border-gray-500" : "border-gray-200";
+    const BorderScheduleSholatDaily = SystemTheme === "dark" ? "border-gray-500" : "border-gray-200";
 
 
     const onLoadCallBack = () => {
@@ -86,7 +87,7 @@ const UserLocations = () => {
         <div onLoad={onLoadCallBack}>
             <BackNavigations SurahName='' link={'/Home'} />
             <DateSlider />
-            <div className={`${ScheduleSholat} mt-10`}>
+            <div className={`${ScheduleSholat} mt-10 ml-2 mr-2 rounded-lg`}>
                 <div className="flex flex-wrap gap-2 p-3 border-b border-gray-700">
                     <i className='bx bx-current-location text-3xl font-bold'></i>
                     <h5 className="text-left text-2xl font-semibold">
@@ -94,10 +95,9 @@ const UserLocations = () => {
                     </h5>
                 </div>
 
-
                 <div className="block p-3">
                     <div className="grid grid-cols-2 gap-3">
-                        <div className={`text-center text-xl border ${BorderScheduleSholat} border-r-gray-700`}>
+                        <div className={`text-center  text-xl border ${BorderScheduleSholat} border-r-gray-700`}>
                             Waktu Imsak
                             <h5 className="text-3xl font-bold mt-3 mb-3">
                                 {loading ? (
@@ -124,14 +124,26 @@ const UserLocations = () => {
             </div>
 
 
-            <div className={`${ScheduleSholat} mt-10`}>
+            <div className={`${ScheduleSholat} mt-10 ml-2 mr-2 rounded-lg mb-20`}>
                 <div className="grid grid-cols-1 gap-5 ml-2 mr-2 mt-10 pb-16">
-                    <ScheduleCard title="Sholat Subuh" Jadwal={JadwalDaily && JadwalDaily.subuh} />
-                    <ScheduleCard title="Sholat Dhuha" Jadwal={JadwalDaily && JadwalDaily.dhuha} />
-                    <ScheduleCard title="Sholat Dzuhur" Jadwal={JadwalDaily && JadwalDaily.dhuha} />
-                    <ScheduleCard title="Sholat Ashar" Jadwal={JadwalDaily && JadwalDaily.ashar} />
-                    <ScheduleCard title="Sholat Maghrib" Jadwal={JadwalDaily && JadwalDaily.maghrib} />
-                    <ScheduleCard title="Sholat Isya" Jadwal={JadwalDaily && JadwalDaily.isya} />
+                    <div className={`border ${BorderScheduleSholatDaily} border-b-gray-300 pb-4 mt-5`}>
+                        <ScheduleCard title="Sholat Subuh" Jadwal={JadwalDaily && JadwalDaily.subuh} />
+                    </div>
+                    <div className={`border ${BorderScheduleSholatDaily} border-b-gray-300 pb-4`}>
+                        <ScheduleCard title="Sholat Dhuha" Jadwal={JadwalDaily && JadwalDaily.dhuha} />
+                    </div>
+                    <div className={`border ${BorderScheduleSholatDaily} border-b-gray-300 pb-4`}>
+                        <ScheduleCard title="Sholat Dzuhur" Jadwal={JadwalDaily && JadwalDaily.dhuha} />
+                    </div>
+                    <div className={`border ${BorderScheduleSholatDaily} border-b-gray-300 pb-4`}>
+                        <ScheduleCard title="Sholat Ashar" Jadwal={JadwalDaily && JadwalDaily.ashar} />
+                    </div>
+                    <div className={`border ${BorderScheduleSholatDaily} border-b-gray-300 pb-4`}>
+                        <ScheduleCard title="Sholat Maghrib" Jadwal={JadwalDaily && JadwalDaily.maghrib} />
+                    </div>
+                    <div className={`border ${BorderScheduleSholatDaily} border-b-gray-300 pb-4`}>
+                        <ScheduleCard title="Sholat Isya" Jadwal={JadwalDaily && JadwalDaily.isya} />
+                    </div>
                 </div>
             </div>
             <MobileNavigations />

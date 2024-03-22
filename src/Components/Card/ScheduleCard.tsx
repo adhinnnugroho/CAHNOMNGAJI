@@ -6,7 +6,7 @@ type PropsType = {
 const ScheduleCard = (props: PropsType) => {
     const { Jadwal, title } = props
     return (
-        <div className="col-span-1 border-b pb-1 border-b-gray-500">
+        <div className="col-span-1 pb-1">
             <div className="grid grid-cols-3 gap-4">
                 <div className="col-span-2">
                     <div className="flex flex-wrap gap-3">
