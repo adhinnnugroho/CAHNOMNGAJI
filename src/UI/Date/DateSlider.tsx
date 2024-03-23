@@ -8,10 +8,10 @@ type TypeProps = {
 }
 
 const MonthSlider = (prop: TypeProps) => {
+    const { cityId, year, month } = prop
     const [currentDate] = useState(new Date());
     const [daysInMonth, setDaysInMonth] = useState<{ date: Date; dayName: string; isToday: boolean }[]>([]);
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-    const [isToday, setIsToday] = useState(false);
 
     useEffect(() => {
         const getDaysInMonth = () => {
@@ -23,12 +23,12 @@ const MonthSlider = (prop: TypeProps) => {
             for (let day = 1; day <= 7; day++) {
                 const date = new Date(year, month, today.getDate() + day - today.getDay());
                 const dayName = getDayName(date.getDay());
-                const isToday = date.toDateString() === today.toDateString(); // Check if the date is today
-                isToday ? setIsToday(true) : setIsToday(false);
+                const isToday = date.toDateString() === today.toDateString();
                 days.push({ date, dayName, isToday });
             }
 
             setDaysInMonth(days);
+
         };
 
         const getDayName = (dayIndex: number) => {
@@ -40,18 +40,19 @@ const MonthSlider = (prop: TypeProps) => {
     }, [currentDate]);
 
     const changeSchedule = (date: Date) => {
-        // Function to change schedule when a date is clicked
         setSelectedDate(date);
-        setIsToday(false);
+        setDaysInMonth(prev => prev.map(day => ({ ...day, isToday: day.date.toDateString() === date.toDateString() })));
+        
+
     };
 
 
+    
     return (
         <div className='overflow-x-auto scrollbar-hidden mt-10 ml-1'>
             <div className='flex space-x-4'>
                 {daysInMonth.map((day, index) => (
-                    // <div key={index} className='border border-gray-500 rounded-lg'>
-                    <div key={index} className={`border rounded-lg cursor-pointer ${isToday 
+                    <div key={index} className={`border rounded-lg cursor-pointer ${day.isToday
                         ? 'bg-green-600 border-green-600' 
                         : 'border-gray-500'} 
                         

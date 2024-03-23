@@ -78,13 +78,9 @@ const UserLocations = () => {
     const BorderScheduleSholatDaily = SystemTheme === "dark" ? "border-gray-500" : "border-gray-200";
 
 
-    const onLoadCallBack = () => {
-        setLoading(true)
-    }
-
 
     return (
-        <div onLoad={onLoadCallBack}>
+        <div>
             <BackNavigations SurahName='' link={'/Home'} />
             <DateSlider cityId={CityId} year={GetDate.year} month={GetDate.month} />
             <div className={`${ScheduleSholat} mt-10 ml-2 mr-2 rounded-lg`}>
