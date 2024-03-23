@@ -5,6 +5,8 @@ import MobileNavigations from "@/UI/Navigations/MobileNavigations";
 import DateSlider from "@/UI/Date/DateSlider";
 import { useTheme } from "next-themes";
 import ScheduleCard from "@/Components/Card/ScheduleCard";
+import { retrieveScheduleSholatDaily, retrieveSpecificCityData } from "@/lib/Schedule/ScheduleServices";
+import { retrieveUserLocations } from "@/lib/Locations/LocationServices";
 
 const UserLocations = () => {
     const { systemTheme, theme } = useTheme();
@@ -26,21 +28,19 @@ const UserLocations = () => {
 
 
     const getUserLocations = async (latitude: number, longitude: number) => {
-        const data = await SholatServices.getUserLocations(latitude, longitude);
-        setUserLocation(data.data.locationData.city);
+        const UserLocationsResponse = await retrieveUserLocations(latitude, longitude);
+        setUserLocation(UserLocationsResponse.city);
     }
 
     const getCityId = async (city: string) => {
-        const CityData = await SholatServices.getCityId(city);
-        const GetCityData = CityData.data.data[0];
-        setCity(GetCityData.lokasi);
-        setCityId(GetCityData.id);
+        const cityDataResponse = await retrieveSpecificCityData(city);
+        setCity(cityDataResponse.lokasi);
+        setCityId(cityDataResponse.id);
     }
 
     const getScheduleSholatDaily = async (cityId: number, year: number, month: number, date: number) => {
-        const ScheduleSholat = await SholatServices.getScheduleSholatDaily(cityId, year, month, date);
-        const GetDataDailyScheduleSholat = ScheduleSholat.data.data.data;
-        setJadwalDaily(GetDataDailyScheduleSholat.jadwal);
+        const ScheduleSholatResponse = await retrieveScheduleSholatDaily(cityId, year, month, date);
+        setJadwalDaily(ScheduleSholatResponse.jadwal);
         setLoading(false);
     }
 

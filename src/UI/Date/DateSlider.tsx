@@ -39,11 +39,9 @@ const MonthSlider = (prop: TypeProps) => {
         getDaysInMonth();
     }, [currentDate]);
 
-    const changeSchedule = (date: Date) => {
+    const changeSchedule = async (date: Date) => {
         setSelectedDate(date);
         setDaysInMonth(prev => prev.map(day => ({ ...day, isToday: day.date.toDateString() === date.toDateString() })));
-        
-
     };
 
 
