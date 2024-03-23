@@ -1,15 +1,19 @@
+import BackNavigations from "@/UI/Navigations/BackNavigations"
 import MobileNavigations from "@/UI/Navigations/MobileNavigations"
 import Navigations from "@/UI/Navigations/Navigations"
 
 type propType = {
-    'children': React.ReactNode
+    'children': React.ReactNode,
+    'NavigationType'?: String,
+    'linkNavigation'?: string | URL,
+    'NavbarTitle'?: string
 }
 
 const AppLayout = (prop: propType) => {
-    const { children } = prop
+    const { children, NavigationType,linkNavigation, NavbarTitle } = prop
     return (
         <div className="dark:bg-black bg-gray-100">
-            <Navigations />
+            {NavigationType === "Back" ? <BackNavigations SurahName={NavbarTitle} link={linkNavigation} /> : <Navigations />}
             {children}
             <MobileNavigations />
         </div>

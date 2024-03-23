@@ -7,6 +7,7 @@ import { useTheme } from "next-themes";
 import ScheduleCard from "@/Components/Card/ScheduleCard";
 import { retrieveScheduleSholatDaily, retrieveSpecificCityData } from "@/lib/Schedule/ScheduleServices";
 import { retrieveUserLocations } from "@/lib/Locations/LocationServices";
+import AppLayout from "@/Layout/App";
 
 const UserLocations = () => {
     const { systemTheme, theme } = useTheme();
@@ -80,8 +81,8 @@ const UserLocations = () => {
 
 
     return (
-        <div>
-            <BackNavigations SurahName='' link={'/Home'} />
+        <AppLayout NavigationType="Back" linkNavigation="/Home" NavbarTitle="">
+            
             <DateSlider cityId={CityId} year={GetDate.year} month={GetDate.month} />
             <div className={`${ScheduleSholat} mt-10 ml-2 mr-2 rounded-lg`}>
                 <div className="flex flex-wrap gap-2 p-3 border-b border-gray-700">
@@ -148,8 +149,7 @@ const UserLocations = () => {
                     </div>
                 </div>
             </div>
-            <MobileNavigations />
-        </div>
+        </AppLayout>
     );
 }
 
