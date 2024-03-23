@@ -1,6 +1,4 @@
 import NavCard from "@/Components/Card/NavCard";
-import Image from "next/image";
-import Link from "next/link";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
 
@@ -33,7 +31,7 @@ const MobileNavigations = () => {
                     </div>
                     <div className="col-span-1 text-center">
                         <NavCard icon={SholatIcons} type_icons="img" status_link={route.pathname === "/bank"}
-                            link="/bank" />
+                            link="/Locations" />
                     </div>
                     <div className="col-span-1 text-center">
                         <NavCard icon={DoaIcons} type_icons="img" status_link={route.pathname === "/Profile"}

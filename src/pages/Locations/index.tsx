@@ -86,12 +86,18 @@ const UserLocations = () => {
     return (
         <div onLoad={onLoadCallBack}>
             <BackNavigations SurahName='' link={'/Home'} />
-            <DateSlider />
+            <DateSlider cityId={CityId} year={GetDate.year} month={GetDate.month} />
             <div className={`${ScheduleSholat} mt-10 ml-2 mr-2 rounded-lg`}>
                 <div className="flex flex-wrap gap-2 p-3 border-b border-gray-700">
                     <i className='bx bx-current-location text-3xl font-bold'></i>
                     <h5 className="text-left text-2xl font-semibold">
-                        {City}
+
+                        {loading ? (
+                            <div className="text-gray-400 text-center blur-sm">BANJARNEGARA</div>
+                        ) : (
+                            City
+                        )
+                        }
                     </h5>
                 </div>
 
