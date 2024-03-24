@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-import SholatServices from "@/Services/Sholat";
-import BackNavigations from "@/UI/Navigations/BackNavigations";
-import MobileNavigations from "@/UI/Navigations/MobileNavigations";
 import DateSlider from "@/UI/Date/DateSlider";
 import { useTheme } from "next-themes";
 import ScheduleCard from "@/Components/Card/ScheduleCard";
 import { retrieveScheduleSholatDaily, retrieveSpecificCityData } from "@/lib/Schedule/ScheduleServices";
 import { retrieveUserLocations } from "@/lib/Locations/LocationServices";
 import AppLayout from "@/Layout/App";
+import { getCoordinatesUser } from "@/lib/Locations/LocationsProviders";
+import SkeletonLoading from "@/Components/Loading/SkeletonLoading";
 
 const UserLocations = () => {
     const { systemTheme, theme } = useTheme();
@@ -21,80 +20,60 @@ const UserLocations = () => {
 
     const [SystemTheme, setSystemTheme] = useState<any>(null);
     const [JadwalDaily, setJadwalDaily] = useState<any>(null);
-    const [UserLocation, setUserLocation] = useState<any>(null);
     const [CityId, setCityId] = useState<any>(null);
     const [City, setCity] = useState<any>(null);
 
     const [loading, setLoading] = useState(true);
 
-
-    const getUserLocations = async (latitude: number, longitude: number) => {
-        const UserLocationsResponse = await retrieveUserLocations(latitude, longitude);
-        setUserLocation(UserLocationsResponse.city);
-    }
-
-    const getCityId = async (city: string) => {
-        const cityDataResponse = await retrieveSpecificCityData(city);
-        setCity(cityDataResponse.lokasi);
-        setCityId(cityDataResponse.id);
-    }
-
-    const getScheduleSholatDaily = async (cityId: number, year: number, month: number, date: number) => {
-        const ScheduleSholatResponse = await retrieveScheduleSholatDaily(cityId, year, month, date);
-        setJadwalDaily(ScheduleSholatResponse.jadwal);
-        setLoading(false);
-    }
-
     useEffect(() => {
-        const getLocation = () => {
-            const options = { enableHighAccuracy: true };
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    const { latitude, longitude } = position.coords;
-                    getUserLocations(latitude, longitude);
-                },
-                (error) => console.error(error.message),
-                options
-            );
+        const fetchData = async () => {
+            try {
+                // Mendapatkan koordinat pengguna
+                const coordinates = await getCoordinatesUser() as [number, number];
+                const [latitude, longitude] = coordinates;
+
+                // Mendapatkan lokasi pengguna
+                const UserLocationsResponse = await retrieveUserLocations(latitude, longitude);
+
+                // Jika lokasi pengguna sudah didapatkan, ambil ID kota
+                if (UserLocationsResponse.city) {
+                    const cityDataResponse = await retrieveSpecificCityData(UserLocationsResponse.city.name);
+                    setCity(cityDataResponse.lokasi);
+                    setCityId(cityDataResponse.id);
+
+                    // Ambil jadwal sholat harian jika ID kota tersedia
+                    if (cityDataResponse.id) {
+                        const ScheduleSholatResponse = await retrieveScheduleSholatDaily(cityDataResponse.id, GetDate.year, GetDate.month, GetDate.day);
+                        setJadwalDaily(ScheduleSholatResponse.jadwal);
+                        setLoading(false);
+                    }
+                }
+            } catch (error) {
+                console.error('Error retrieving data:', error);
+            }
         };
-        getLocation();
-    }, []);
+
+        fetchData();
+    }, [GetDate.year, GetDate.month, GetDate.day, theme, systemTheme]);
+
 
     useEffect(() => {
-        if (UserLocation) {
-            getCityId(UserLocation.name);
-        }
-
-        if (CityId) {
-            getScheduleSholatDaily(CityId, GetDate.year, GetDate.month, GetDate.day);
-        }
-
         const currentTheme = theme === 'system' ? systemTheme : theme;
         setSystemTheme(currentTheme);
-
-    }, [CityId, GetDate.year, GetDate.month, GetDate.day, UserLocation, theme, systemTheme]);
+    }, [theme, systemTheme]);
 
     const ScheduleSholat = SystemTheme === "dark" ? "bg-gray-500" : "bg-gray-100";
     const BorderScheduleSholat = SystemTheme === "dark" ? "border-gray-500" : "border-gray-200";
     const BorderScheduleSholatDaily = SystemTheme === "dark" ? "border-gray-500" : "border-gray-200";
 
-
-
     return (
         <AppLayout NavigationType="Back" linkNavigation="/Home" NavbarTitle="">
-            
             <DateSlider cityId={CityId} year={GetDate.year} month={GetDate.month} />
             <div className={`${ScheduleSholat} mt-10 ml-2 mr-2 rounded-lg`}>
                 <div className="flex flex-wrap gap-2 p-3 border-b border-gray-700">
                     <i className='bx bx-current-location text-3xl font-bold'></i>
                     <h5 className="text-left text-2xl font-semibold">
-
-                        {loading ? (
-                            <div className="text-gray-400 text-center blur-sm">BANJARNEGARA</div>
-                        ) : (
-                            City
-                        )
-                        }
+                        <SkeletonLoading showValue={City} loadingState={loading} loadingValue="BANJARNEGARA" />
                     </h5>
                 </div>
 
@@ -103,29 +82,18 @@ const UserLocations = () => {
                         <div className={`text-center  text-xl border ${BorderScheduleSholat} border-r-gray-700`}>
                             Waktu Imsak
                             <h5 className="text-3xl font-bold mt-3 mb-3">
-                                {loading ? (
-                                    <div className="text-gray-400 text-center blur-sm">50:00</div>
-                                ) : (
-                                    JadwalDaily && JadwalDaily.imsak
-                                )
-                                }
+                                <SkeletonLoading showValue={JadwalDaily && JadwalDaily.imsak} loadingState={loading} loadingValue="50:00" />
                             </h5>
                         </div>
                         <div className=" text-center text-xl ">
                             Waktu Berbuka
                             <h5 className="text-3xl font-bold mt-3 mb-3">
-                                {loading ? (
-                                    <div className="text-gray-400 text-center blur-sm">50:00</div>
-                                ) : (
-                                    JadwalDaily && JadwalDaily.maghrib
-                                )
-                                }
+                                <SkeletonLoading showValue={JadwalDaily && JadwalDaily.maghrib} loadingState={loading} loadingValue="50:00" />
                             </h5>
                         </div>
                     </div>
                 </div>
             </div>
-
 
             <div className={`${ScheduleSholat} mt-10 ml-2 mr-2 rounded-lg mb-20`}>
                 <div className="grid grid-cols-1 gap-5 ml-2 mr-2 mt-10 pb-16">
