@@ -28,7 +28,7 @@ const MobileNavigations = () => {
                     </div>
                     <div className="col-span-1 text-center">
                         <NavCard icon={SholatIcons} type_icons="img" status_link={route.pathname === "/bank"}
-                            link="/Locations" />
+                            link="/SchedulePrayer" />
                     </div>
                     <div className="col-span-1 text-center">
                         <NavCard icon={DoaIcons} type_icons="img" status_link={route.pathname === "/Profile"}
