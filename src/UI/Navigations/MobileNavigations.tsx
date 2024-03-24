@@ -21,13 +21,10 @@ const MobileNavigations = () => {
     return (
         <nav className="dark:bg-black bg-gray-300 shadow-sm fixed bottom-0 w-full h-14">
             <div className="mx-auto max-w-7xl mt-2">
-                <div className="grid grid-cols-5 gap-3 ml-5">
+                <div className="grid grid-cols-4 gap-3 ml-5">
                     <div className="col-span-1 text-center ">
                         <NavCard icon={HomeIcons} type_icons="img" status_link={route.pathname === "/"}
                             link="/" />
-                    </div>
-                    <div className="col-span-1 text-center">
-                        <NavCard icon={LampuIcons} type_icons="img" status_link={route.pathname === "/cari"} />
                     </div>
                     <div className="col-span-1 text-center">
                         <NavCard icon={SholatIcons} type_icons="img" status_link={route.pathname === "/bank"}
