@@ -2,7 +2,7 @@ import AppLayout from "@/Layout/App"
 import SurahService from "@/Services/Surah"
 import Image from "next/image"
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 
 
 const LastReadBackground = '/img/last_read.png'
@@ -12,15 +12,48 @@ const HomeScreen = () => {
 
     const [surah, setSurah] = useState([])
     const [lastReadSurah, setLastReadSurah] = useState<any>([]);
+    const [loadedDataCount, setLoadedDataCount] = useState(0);
+
 
 
     useEffect(() => {
         const getSurah = async () => {
             const surah = await SurahService.getAllSurah();
             setSurah(surah.data.data);
+            setLoadedDataCount(5);
         }
         getSurah();
     })
+
+    const loadMoreData = async () => {
+        setLoadedDataCount(prevCount => prevCount + 5);
+    };
+
+    const ScrollHandle = useCallback(() => {
+        const scrollTop = document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight;
+        const clientHeight = document.documentElement.clientHeight;
+
+        if (scrollTop + clientHeight >= scrollHeight && loadedDataCount < 150) {
+            // Jika user mencapai bagian bawah dan masih ada data yang tersedia
+            loadMoreData();
+        } else if (scrollTop === 0 && loadedDataCount > 5) {
+            // Jika user mencapai bagian atas dan sudah memuat lebih dari lima data
+            // Di sini Anda bisa mengatur tindakan untuk kembali ke lima data pertama
+            // Misalnya, dengan me-reset loadedDataCount ke 5
+            setLoadedDataCount(5);
+        }
+    }, [loadedDataCount]);
+
+    useEffect(() => {
+        window.addEventListener('scroll', ScrollHandle);
+        return () => {
+            window.removeEventListener('scroll', ScrollHandle);
+        };
+    }, [ScrollHandle]);
+
+
+
 
     useEffect(() => {
         const lastReadSurah = localStorage.getItem('lastRead');
