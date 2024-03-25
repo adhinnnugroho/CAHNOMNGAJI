@@ -13,9 +13,12 @@ const HomeScreen = () => {
     const [surah, setSurah] = useState([])
     const [lastReadSurah, setLastReadSurah] = useState<any>([]);
     const [loadedDataCount, setLoadedDataCount] = useState(5);
+    const [totalDataCount, setTotalDataCount] = useState(0);
+
 
     const getSurah = useCallback(async () => {
         const responseSurah = await retrieveDataSurah();
+        setTotalDataCount(responseSurah.length);
         setSurah(responseSurah.slice(0, loadedDataCount));
     }, [loadedDataCount]);
 
@@ -32,12 +35,12 @@ const HomeScreen = () => {
         const scrollHeight = document.documentElement.scrollHeight;
         const clientHeight = document.documentElement.clientHeight;
 
-        if (scrollTop + clientHeight >= scrollHeight && loadedDataCount < 150) {
+        if (scrollTop + clientHeight >= scrollHeight && loadedDataCount < totalDataCount) {
             loadMoreData();
         } else if (scrollTop === 0 && loadedDataCount > 5) {
             setLoadedDataCount(5);
         }
-    }, [loadedDataCount]);
+    }, [loadedDataCount, totalDataCount]);
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
