@@ -7,6 +7,7 @@ const HomeIcons = "img/icons/homeicons.png";
 const SholatIcons = "img/icons/sholaticons.png";
 const DoaIcons = "img/icons/doaicons.png";
 const LampuIcons = "img/icons/lampuicons.png";
+const PrayerActiveIcons = "img/icons/activeSholat1.png";
 
 const MobileNavigations = () => {
     const route = useRouter();
@@ -27,7 +28,7 @@ const MobileNavigations = () => {
                             link="/" />
                     </div>
                     <div className="col-span-1 text-center">
-                        <NavCard icon={SholatIcons} type_icons="img" status_link={route.pathname === "/bank"}
+                        <NavCard icon={SholatIcons} active_icons={PrayerActiveIcons} type_icons="img" status_link={route.pathname === "/SchedulePrayer"}
                             link="/SchedulePrayer" />
                     </div>
                     <div className="col-span-1 text-center">
