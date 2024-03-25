@@ -13,12 +13,11 @@ export default async function handler(
         const { surah }: any = req.query;
         const SurahId = surah ? surah[1] : null;
         const data = SurahId ? await retrieveDataByid(SurahId) : await retrieveData();
-        const responsePagination = SurahId ? data.data.data : data.data.data.slice(0, 5);
         res.status(200).json({
             status: true,
             statusCode: 200,
             message: "Surah retrieved data successfully",
-            data: responsePagination
+            data:  data.data.data
         });
     } catch (error) {
         console.error("Error while fetching data:", error);
