@@ -14,6 +14,7 @@ const NavCard = (prop: PropsType) => {
         'bg-green-500 p-5 w-16 h-16 rounded-full -mt-6  border-4 border-gray-100 shadow flex justify-center items-center'
         : '';
     const ClassNameIcon = status_link ? 'text-white' : 'text-black';
+    const ActiveIcon = status_link ? active_icons : icon;
 
 
     if (type_icons == "text") {
@@ -27,7 +28,6 @@ const NavCard = (prop: PropsType) => {
             </div>
         )
     } else if (type_icons == "img") {
-        const ActiveIcon = status_link ? active_icons : icon;
 
         return (
             <div>
