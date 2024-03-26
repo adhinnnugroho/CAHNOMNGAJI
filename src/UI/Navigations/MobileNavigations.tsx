@@ -1,6 +1,5 @@
 import NavCard from "@/Components/Card/NavCard";
 import { useTheme } from "next-themes";
-import Image from "next/image";
 import { useRouter } from "next/router";
 
 
@@ -22,7 +21,7 @@ const MobileNavigations = () => {
     const themeIcon = currentTheme === "dark" ? "bx bx-sun" : "bx bx-moon";
 
     return (
-        <nav className="dark:bg-black bg-gray-300 shadow-sm fixed bottom-0 w-full h-14">
+        <nav className="dark:bg-gray-800 bg-gray-300 shadow-sm fixed bottom-0 w-full p-0 m-0">
             <div className="mx-auto max-w-7xl mt-2">
                 <div className="grid grid-cols-4 gap-3 ml-5">
                     <div className="col-span-1 text-center ">
