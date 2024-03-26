@@ -3,9 +3,10 @@ import { useTheme } from "next-themes";
 import ScheduleCard from "@/Components/Card/ScheduleCard";
 import { retrieveScheduleSholatDaily, retrieveSpecificCityData } from "@/lib/Schedule/ScheduleServices";
 import { retrieveUserLocations } from "@/lib/Locations/LocationServices";
-import AppLayout from "@/Layout/App";
 import { getCoordinatesUser } from "@/lib/Locations/LocationsProviders";
 import SkeletonLoading from "@/Components/Loading/SkeletonLoading";
+import MobileNavigations from "@/UI/Navigations/MobileNavigations";
+import { getDisplayName } from "next/dist/shared/lib/utils";
 
 const FeatSchedulePrayer = () => {
     const { systemTheme, theme } = useTheme();
@@ -26,10 +27,10 @@ const FeatSchedulePrayer = () => {
     const [daysInMonth, setDaysInMonth] = useState<{ date: Date; dayName: string; isToday: boolean }[]>([]);
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const [Today, setToday] = useState<any>(null);
-
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+
         const fetchData = async () => {
             try {
                 // Mendapatkan koordinat pengguna
@@ -65,10 +66,8 @@ const FeatSchedulePrayer = () => {
     }, [theme, systemTheme]);
 
     const ScheduleSholat = SystemTheme === "dark" ? "bg-gray-500" : "bg-gray-100";
-    const BorderScheduleSholat = SystemTheme === "dark" ? "border-gray-500" : "border-gray-200";
-    const BorderScheduleSholatDaily = SystemTheme === "dark" ? "border-gray-500" : "border-gray-200";
-
-
+    const backgroundSholat = SystemTheme === "dark" ? "bg-gray-500" : "bg-gray-200";
+    const backgroundPrayers = SystemTheme === "dark" ? "bg-gray-600" : "bg-gray-300";
 
     useEffect(() => {
         const getDaysInMonth = () => {
@@ -101,84 +100,79 @@ const FeatSchedulePrayer = () => {
         setToday(date.toDateString());
         setDaysInMonth(prev => prev.map(day => ({ ...day, isToday: day.date.toDateString() === date.toDateString() })));
         if (City.id) {
-            const ScheduleSholatResponse = await retrieveScheduleSholatDaily(City.id, currentDateInfo.year, currentDateInfo.month, date.getDate());
+            const ScheduleSholatResponse = await retrieveScheduleSholatDaily(City.id, date.getFullYear(), date.getMonth() + 1, date.getDate());
             setDailyPrayerSchedule(ScheduleSholatResponse.jadwal);
             setLoading(false);
         }
     };
 
-
     return (
-        <AppLayout NavigationType="Back" linkNavigation="/Home" NavbarTitle="">
-            <div className='overflow-x-auto scrollbar-hidden mt-10 ml-1'>
-                <div className='flex space-x-1  ml-1'>
-                    {daysInMonth.map((day, index) => (
-                        <div key={index}>
-                            <div className={`border rounded-lg  cursor-pointer ${!selectedDate && Today === day.date.toDateString()
-                                ? 'bg-green-600 border-green-600'
-                                : 'border-gray-500'} 
+        <>
+            <div className={`${ScheduleSholat} h-auto pb-1`}>
+                <h5 className="text-2xl ml-4 pt-4 font-bold">
+                    Hari ini
+                </h5>
+                <div className="text-xl ml-4 pt-1 font-semibold">
+                    <SkeletonLoading showValue={dailyPrayerSchedule && dailyPrayerSchedule.tanggal} loadingState={loading} loadingValue="10/20/2023" />
+                </div>
+
+
+                <div className='overflow-x-auto scrollbar-hidden mt-10 ml-1'>
+                    <div className='flex space-x-1  ml-1'>
+                        {daysInMonth.map((day, index) => (
+                            <div key={index}>
+                                <div className={`border rounded-lg  cursor-pointer ${!selectedDate && Today === day.date.toDateString()
+                                    ? 'bg-purple-600 border-purple-600'
+                                    : 'border-gray-700'} 
                 
                         ${selectedDate && day.date.toDateString() === selectedDate.toDateString()
-                                    ? 'bg-green-600 border-green-600' : ''}`} onClick={() => changeSchedule(day.date)}>
-                                <div className="text-center w-12 h-16 mt-3">
-                                    <p className='text-xl'>{day.dayName}</p>
-                                    <p className='text-xl'>{day.date.getDate()}</p>
+                                        ? 'bg-purple-600 border-purple-600' : ''}`} onClick={() => changeSchedule(day.date)}>
+                                    <div className="text-center w-12 h-16 mt-3">
+                                        <p className='text-xl'>{day.dayName}</p>
+                                        <p className='text-xl'>{day.date.getDate()}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
-            </div>
 
-            <div className={`${ScheduleSholat} mt-10 ml-2 mr-2 rounded-lg`}>
-                <div className="flex flex-wrap gap-2 p-3 border-b border-gray-700">
+                <div className="flex flex-wrap gap-2 p-3 mt-5">
                     <i className='bx bx-current-location text-3xl font-bold'></i>
                     <h5 className="text-left text-2xl font-semibold">
                         <SkeletonLoading showValue={City && City.lokasi} loadingState={loading} loadingValue="BANJARNEGARA" />
                     </h5>
                 </div>
-
-                <div className="block p-3">
-                    <div className="grid grid-cols-2 gap-3">
-                        <div className={`text-center  text-xl border ${BorderScheduleSholat} border-r-gray-700`}>
-                            Waktu Imsak
-                            <h5 className="text-3xl font-bold mt-3 mb-3">
-                                <SkeletonLoading showValue={dailyPrayerSchedule && dailyPrayerSchedule.imsak} loadingState={loading} loadingValue="50:00" />
-                            </h5>
-                        </div>
-                        <div className=" text-center text-xl ">
-                            Waktu Berbuka
-                            <h5 className="text-3xl font-bold mt-3 mb-3">
-                                <SkeletonLoading showValue={dailyPrayerSchedule && dailyPrayerSchedule.maghrib} loadingState={loading} loadingValue="50:00" />
-                            </h5>
-                        </div>
-                    </div>
-                </div>
             </div>
 
-            <div className={`${ScheduleSholat} mt-10 ml-2 mr-2 rounded-lg mb-20`}>
-                <div className="grid grid-cols-1 gap-5 ml-2 mr-2 mt-10 pb-16">
-                    <div className={`border ${BorderScheduleSholatDaily} border-b-gray-300 pb-4 mt-5`}>
+            <div className={`${backgroundPrayers} mt-5  mb-10`}>
+                <div className="grid grid-cols-1 gap-5 ml-2 mr-2 pt-5 pb-10">
+                    <div className={`${backgroundSholat} p-2 rounded-lg`}>
+                        <ScheduleCard title="Imsyak" Jadwal={loading ? "Loading..." : (dailyPrayerSchedule && dailyPrayerSchedule.imsak)} />
+                    </div>
+                    <div className={`${backgroundSholat} p-2 rounded-lg`}>
                         <ScheduleCard title="Sholat Subuh" Jadwal={loading ? "Loading..." : (dailyPrayerSchedule && dailyPrayerSchedule.subuh)} />
                     </div>
-                    <div className={`border ${BorderScheduleSholatDaily} border-b-gray-300 pb-4`}>
+                    <div className={`${backgroundSholat} p-2 rounded-lg`}>
                         <ScheduleCard title="Sholat Dhuha" Jadwal={loading ? "Loading..." : (dailyPrayerSchedule && dailyPrayerSchedule.dhuha)} />
                     </div>
-                    <div className={`border ${BorderScheduleSholatDaily} border-b-gray-300 pb-4`}>
+                    <div className={`${backgroundSholat} p-2 rounded-lg`}>
                         <ScheduleCard title="Sholat Dzuhur" Jadwal={loading ? "Loading..." : (dailyPrayerSchedule && dailyPrayerSchedule.dzuhur)} />
                     </div>
-                    <div className={`border ${BorderScheduleSholatDaily} border-b-gray-300 pb-4`}>
+                    <div className={`${backgroundSholat} p-2 rounded-lg`}>
                         <ScheduleCard title="Sholat Ashar" Jadwal={loading ? "Loading..." : (dailyPrayerSchedule && dailyPrayerSchedule.ashar)} />
                     </div>
-                    <div className={`border ${BorderScheduleSholatDaily} border-b-gray-300 pb-4`}>
+                    <div className={`${backgroundSholat} p-2 rounded-lg`}>
                         <ScheduleCard title="Sholat Maghrib" Jadwal={loading ? "Loading..." : (dailyPrayerSchedule && dailyPrayerSchedule.maghrib)} />
                     </div>
-                    <div className={`border ${BorderScheduleSholatDaily} border-b-gray-300 pb-4`}>
+                    <div className={`${backgroundSholat} p-2 rounded-lg`}>
                         <ScheduleCard title="Sholat Isya" Jadwal={loading ? "Loading..." : (dailyPrayerSchedule && dailyPrayerSchedule.isya)} />
                     </div>
                 </div>
             </div>
-        </AppLayout>
+
+            <MobileNavigations />
+        </>
     );
 }
 

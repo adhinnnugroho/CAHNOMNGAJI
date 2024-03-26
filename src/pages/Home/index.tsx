@@ -81,6 +81,27 @@ const HomeScreen = () => {
 
     }, []);
 
+
+    const HandleRealtimeSearch = async (SearchValue: any) => {
+        const responseSurah = await retrieveDataSurah();
+        if (SearchValue === '') {
+            setSearchParam(SearchValue)
+            setSurah(responseSurah.slice(0, loadedDataCount));
+        } else {
+            setSearchParam(SearchValue)
+            setSurah(responseSurah);
+        }
+    }
+
+    const filteredSurahs = surah && surah.filter((surah: any) =>
+        surah.namaLatin.toLowerCase().includes(SearchParam.toLowerCase())
+    );
+
+    useEffect(() => {
+        filteredSurahs
+    }, [filteredSurahs]);
+
+
     return (
         <AppLayout>
             <>
@@ -112,7 +133,7 @@ const HomeScreen = () => {
                         </div>
                         <div className="col-span-2 text-3xl text-right mr-3 relative">
                             <input type="text" className="bg-white border-none outline-none w-10 h-10 rounded-full p-2 
-                            transition-width duration-500 search-input text-black" onChange={(e) => setSearchParam(e.target.value)} />
+                            transition-width duration-500 search-input text-black" onChange={(e) => HandleRealtimeSearch(e.target.value)} />
                             <i className='bx bx-search-alt-2 search-button absolute top-1 right-1 text-purple-600' onClick={toggleSearch}></i>
                             <i className='bx bx-x-circle bg-purple-600 rounded-full p-1 close-button hidden absolute top-0 right-0' onClick={toggleSearch}></i>
                         </div>
@@ -120,7 +141,7 @@ const HomeScreen = () => {
                     </div>
 
                     <div className="grid grid-cols-1 gap-5 ml-2 mr-2 mt-10 pb-16">
-                        {surah && surah.filter((surah: any) => surah.namaLatin.toLowerCase().includes(SearchParam.toLowerCase())).map((surah: any, index: number) => {
+                        {filteredSurahs.map((surah: any, index: number) => {
                             return (
                                 <div key={index}>
                                     <Link href={`/Surah/${surah.nomor}`}>
