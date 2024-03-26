@@ -1,15 +1,16 @@
 import MobileNavigations from "@/UI/Navigations/MobileNavigations"
 import { retrieveAllDoa } from "@/lib/Doa/DoaLib";
+import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 
 const DoaScreen = () => {
     const [Doa, setDoa] = useState([])
-    const [loadedDataCount, setLoadedDataCount] = useState(5);
+    const [loadedDataCount, setLoadedDataCount] = useState(10);
     const [totalDataCount, setTotalDataCount] = useState(0);
-    const getSurah = useCallback(async () => {
-        const responseSurah = await retrieveAllDoa();
-        setTotalDataCount(responseSurah.length);
-        setDoa(responseSurah.slice(0, loadedDataCount));
+    const getAllDoa = useCallback(async () => {
+        const responseDoa = await retrieveAllDoa();
+        setTotalDataCount(responseDoa.length);
+        setDoa(responseDoa.slice(0, loadedDataCount));
     }, [loadedDataCount]);
 
     const [SearchParam, setSearchParam] = useState('');
@@ -29,6 +30,10 @@ const DoaScreen = () => {
     };
 
     useEffect(() => {
+        getAllDoa();
+    }, [getAllDoa]);
+
+    useEffect(() => {
         return () => {
             const searchButton = document.querySelector('.search-button');
             const searchInput = document.querySelector('.search-input');
@@ -37,6 +42,29 @@ const DoaScreen = () => {
         };
 
     }, []);
+
+    const loadMoreData = async () => {
+        setLoadedDataCount(prevCount => prevCount + 10);
+    };
+
+    const handleScroll = useCallback(() => {
+        const scrollTop = document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight;
+        const clientHeight = document.documentElement.clientHeight;
+
+        if (scrollTop + clientHeight >= scrollHeight && loadedDataCount < totalDataCount) {
+            loadMoreData();
+        } else if (scrollTop === 0 && loadedDataCount > 10) {
+            setLoadedDataCount(10);
+        }
+    }, [loadedDataCount, totalDataCount]);
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [handleScroll]);
 
     return (
         <>
@@ -55,6 +83,29 @@ const DoaScreen = () => {
                 </div>
             </div>
 
+            <div className="grid grid-cols-1 gap-5 ml-2 mr-2 mt-10 pb-16">
+                {Doa.map((Doa: any, index: number) => {
+                    return (
+                        <div key={index}>
+                            <Link href={`/Surah/${Doa.nomor}`}>
+                                <div className="col-span-1 border-b pb-1 border-b-gray-500">
+                                    <div className="grid grid-cols-3 gap-4">
+                                        <div className="col-span-2">
+                                            <div className="flex flex-wrap gap-3">
+                                                <div className="block">
+                                                    <h5 className="text-xl font-bold">
+                                                        {Doa.judul}
+                                                    </h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Link>
+                        </div>
+                    )
+                })}
+            </div>
 
 
             <MobileNavigations />

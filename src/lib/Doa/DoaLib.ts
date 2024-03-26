@@ -7,6 +7,6 @@ export async function retrieveDataDoa() {
 }
 
 export async function retrieveAllDoa(){
-    const ResponseEndPointDoa = DoaServices.getAllDoa();
+    const ResponseEndPointDoa = await DoaServices.getAllDoa();
     return ResponseEndPointDoa.data.data;
 }

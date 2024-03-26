@@ -16,7 +16,7 @@ export default async function handler(
             status: true,
             statusCode: 200,
             message: "retrieved data doa successfully",
-            responseDoa: response.data.data
+            data: response.data.data
         });
     } catch (error) {
         console.error("Error while fetching data:", error);
