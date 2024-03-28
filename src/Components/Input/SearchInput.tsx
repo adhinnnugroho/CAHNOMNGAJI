@@ -1,55 +1,54 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const Home = () => {
-    const [isActiveSearch, setIsActiveSearch] = useState(false);
-    const [searchQuery, setSearchQuery] = useState('');
+type PropsType = {
+    'className'?: string,
+    'onChange'?: (e: any) => void,
+}
+
+
+
+const SearchInput = (props: PropsType) => {
+
+    const { onChange } = props;
 
     const toggleSearch = () => {
-        setIsActiveSearch(!isActiveSearch);
-        setSearchQuery('');
+        const closeButton = document.querySelector('.close-button');
+        const SearchButton = document.querySelector('.search-button');
+        const inputField = document.querySelector('.search-input');
+        closeButton?.classList.toggle('hidden');
+        SearchButton?.classList.toggle('hidden');
+        inputField?.classList.toggle('w-56');
+        inputField?.classList.toggle('w-10');
+        inputField?.classList.toggle('rounded-lg');
+        inputField?.classList.toggle('rounded-full');
+        inputField?.classList.toggle('p-5');
+        inputField?.classList.toggle('p-2');
     };
 
-    const handleSearchInputChange = (e: any) => {
-        setSearchQuery(e.target.value);
-    };
 
-    const handleSearch = (e) => {
-        e.preventDefault();
-        console.log("Searching for:", searchQuery);
-        setIsActiveSearch(false);
-        setSearchQuery('');
-    };
+    useEffect(() => {
+        return () => {
+            const searchButton = document.querySelector('.search-button');
+            const searchInput = document.querySelector('.search-input');
+            searchButton?.removeEventListener('click', toggleSearch);
+            searchInput?.removeEventListener('keydown', toggleSearch);
+        };
+
+    }, []);
+
 
     return (
-        <div className="container flex flex-col justify-center items-center min-h-screen bg-green-500">
-            <h1 className="title text-2xl text-black mb-8">Search Example</h1>
-            <form
-                className={`search-form relative w-${isActiveSearch ? 'full' : '12'} h-12 rounded-full bg-white shadow-md p-3 transition-width`}
-                onSubmit={handleSearch}
-            >
-                <input
-                    type="text"
-                    className="search-input bg-white border-none outline-none w-full h-full rounded-full pl-4 text-sm"
-                    placeholder="Search..."
-                    value={searchQuery}
-                    onChange={handleSearchInputChange}
-                    disabled={!isActiveSearch}
-                />
-                <button
-                    type="button"
-                    className="search-button w-12 h-12 rounded-full bg-green-600 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all"
-                    onClick={toggleSearch}
-                >
-                    <span className={`search-icon text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${isActiveSearch ? 'opacity-0' : 'opacity-100'}`}>
-                        Search
-                    </span>
-                    <span className={`search-close text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${isActiveSearch ? 'opacity-100' : 'opacity-0'}`}>
-                        X
-                    </span>
-                </button>
-            </form>
-        </div>
+        <>
+            <input type="text"
+                className="bg-white border-none outline-none w-10 h-10 rounded-full p-2 
+                            transition-width duration-500 search-input text-black"
+                onChange={onChange} />
+            <i className='bx bx-search-alt-2 search-button absolute top-1 right-1 text-purple-600'
+                onClick={toggleSearch}></i>
+            <i className='bx bx-x-circle bg-purple-600 rounded-full p-1 close-button hidden absolute top-0 right-0'
+                onClick={toggleSearch}></i>
+        </>
     );
 };
 
-export default Home;
+export default SearchInput;
