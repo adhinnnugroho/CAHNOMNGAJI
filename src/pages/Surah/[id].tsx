@@ -9,7 +9,7 @@ import AppLayout from '@/Layout/App';
 
 const SurahDetail = () => {
     const router = useRouter();
-    const { id } = useRouter().query;
+    const { id } = router.query;
     const [detailSurah, setDetailSurah] = useState([]);
     const [surah, setSurah] = useState<any>([]);
     const [playingIndex, setPlayingIndex] = useState(-1);
