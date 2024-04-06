@@ -30,7 +30,6 @@ const FeatSchedulePrayer = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-
         const fetchData = async () => {
             try {
                 // Mendapatkan koordinat pengguna
