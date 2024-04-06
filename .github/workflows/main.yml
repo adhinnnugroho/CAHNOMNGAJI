@@ -1,6 +1,6 @@
-on: 
+on:
   push:
-  branches:
+    branches:
       - main
 name: 🚀 Deploy website on push
 jobs:
@@ -8,12 +8,12 @@ jobs:
     name: 🎉 Deploy
     runs-on: ubuntu-latest
     steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v4
-    
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-      with:
-        server: ${{secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_MAIN_USERNAME }}
-        password: ${{ secrets.FTP_MAIN_PASSWORD }}
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_MAIN_USERNAME }}
+          password: ${{ secrets.FTP_MAIN_PASSWORD }}
