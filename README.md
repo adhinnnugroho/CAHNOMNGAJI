@@ -24,11 +24,7 @@ Pastikan Anda telah menginstal hal-hal berikut sebelum memulai:
 - Node.js (versi terbaru disarankan)
 - npm atau yarn (pengelola paket)
 
-## Instalasi
-
-1.  Clone repositori ini:
-  ```bash
-   git clone https://github.com/adhinnnugroho/CAHNOMNGAJI.git
+## Preview UI
 
 
 <img src="https://cahenomnusantara.com/images/porto/ngaji.png" alt="ngaji-with-cahenom" />
