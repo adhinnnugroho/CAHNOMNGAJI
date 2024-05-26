@@ -1,24 +1,34 @@
-## RAMADHAN PROJECTS
+# Cahenom Ngaji
 
-## Getting Started
+Cahenom Ngaji adalah aplikasi web untuk membaca Al-Qur'an, menampilkan jadwal sholat berdasarkan lokasi pengguna, dan doa-doa harian. Aplikasi ini dibuat menggunakan Next.js untuk frontend, Prisma sebagai ORM untuk manajemen database, dan REST API dari equran.id untuk mendapatkan data surah Al-Qur'an.
 
-First, run the development server:
+## Fitur
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Menampilkan daftar surah
+- Menampilkan detail surah
+- Menampilkan jadwal sholat berdasarkan lokasi pengguna
+- Menampilkan doa-doa harian
+- Antarmuka pengguna yang responsif dan ramah pengguna
 
-## Learn More
+## Teknologi yang Digunakan
 
-To learn more about Next.js, take a look at the following resources:
+- [Next.js](https://nextjs.org/) - Framework React untuk pengembangan aplikasi web
+- [Prisma](https://www.prisma.io/) - ORM untuk manajemen database
+- [equran.id API](https://equran.id/api/v2/surat) - API untuk mendapatkan data surah Al-Qur'an
+- [Fatimah API](https://api.myquran.com/v2) - Untuk mendapatkan jadwal sholat
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+## Prasyarat
+
+Pastikan Anda telah menginstal hal-hal berikut sebelum memulai:
+
+- Node.js (versi terbaru disarankan)
+- npm atau yarn (pengelola paket)
+
+## Instalasi
+
+1.  Clone repositori ini:
+  ```bash
+   git clone https://github.com/adhinnnugroho/CAHNOMNGAJI.git
 
 
 <img src="https://cahenomnusantara.com/images/porto/ngaji.png" alt="ngaji-with-cahenom" />
