@@ -1,30 +1,26 @@
 # Cahenom Ngaji
 
-Cahenom Ngaji adalah aplikasi web untuk membaca Al-Qur'an, menampilkan jadwal sholat berdasarkan lokasi pengguna, dan doa-doa harian. Aplikasi ini dibuat menggunakan Next.js untuk frontend, Prisma sebagai ORM untuk manajemen database, dan REST API dari equran.id untuk mendapatkan data surah Al-Qur'an.
+Cahenom Ngaji is a web application for reading the Qur'an, displaying prayer times based on the user's location, and providing daily prayers. This application is built using Next.js for the frontend, Prisma as the ORM for database management, and the REST API from equran.id to fetch Qur'an surah data.
 
-## Fitur
+## Features
 
-- Menampilkan daftar surah
-- Menampilkan detail surah
-- Menampilkan jadwal sholat berdasarkan lokasi pengguna
-- Menampilkan doa-doa harian
-- Antarmuka pengguna yang responsif dan ramah pengguna
+- Displaying a list of surahs
+- Displaying surah details
+- Displaying prayer times based on user location
+- Displaying daily prayers
+- Responsive and user-friendly user interface
 
-## Teknologi yang Digunakan
+## Technologies Used
 
-- [Next.js](https://nextjs.org/) - Framework React untuk pengembangan aplikasi web
-- [Prisma](https://www.prisma.io/) - ORM untuk manajemen database
-- [equran.id API](https://equran.id/api/v2/surat) - API untuk mendapatkan data surah Al-Qur'an
-- [Fatimah API](https://api.myquran.com/v2) - Untuk mendapatkan jadwal sholat
+- [Next.js](https://nextjs.org/) - React framework for web application development
+- [Prisma](https://www.prisma.io/) - ORM for database management
+- [equran.id API](https://equran.id/api/v2/surat) - API to fetch Qur'an surah data
+- [Fatimah API](https://api.myquran.com/v2) - API to fetch prayer times
 
-## Prasyarat
+## Prerequisites
 
-Pastikan Anda telah menginstal hal-hal berikut sebelum memulai:
+Make sure you have installed the following before starting:
 
-- Node.js (versi terbaru disarankan)
-- npm atau yarn (pengelola paket)
+- Node.js (latest version recommended)
+- npm or yarn (package manager)
 
-## Preview UI
-
-
-<img src="https://cahenomnusantara.com/images/porto/ngaji.png" alt="ngaji-with-cahenom" />
