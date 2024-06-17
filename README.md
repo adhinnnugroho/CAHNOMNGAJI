@@ -25,10 +25,10 @@ Make sure you have installed the following before starting:
 - npm or yarn (package manager)
 
 ## Installation
-1 . Clone the repository:
+1. Clone the repository:
    ```bash
-    git clone https://github.com/adhinnnugroho/CAHNOMNGAJI.git
-
+   https://github.com/adhinnnugroho/CAHNOMNGAJI.git
+   
 2. Navigate to the project directory:
    ```bash
    cd CahenomNgaji
