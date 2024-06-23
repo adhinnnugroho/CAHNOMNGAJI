@@ -16,14 +16,14 @@ const SimpleButton = (prop: PropsType) => {
     const Classrounded = rounded ?? "rounded-lg"
     if (type === "submit") {
         return (
-            <button type={type} className={`text-white font-medium py-2 px-4 ${Classrounded}  ${bgcolor} ${className}`}>
+            <button type={type} className={`text-white font-medium cursor-pointer py-2 px-4 ${Classrounded}  ${bgcolor} ${className}`}>
                 {children}
             </button>
         )
     }
     return (
         <Link href={link ? link.toString() : ''} >
-            <button type={type} className={`text-white font-medium py-2 px-4 ${Classrounded}  ${bgcolor} ${className}`}>
+            <button type={type} className={`text-white font-medium cursor-pointer py-2 px-4 ${Classrounded}  ${bgcolor} ${className}`}>
                 {children}
             </button>
         </Link>

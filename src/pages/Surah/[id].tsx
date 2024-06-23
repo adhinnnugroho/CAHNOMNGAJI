@@ -1,11 +1,8 @@
-import SurahService from '@/Services/Surah';
 import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import BackNavigations from '@/UI/Navigations/BackNavigations';
 import SurahDetails from '@/Components/Card/SurahDetails';
-import MobileNavigations from '@/UI/Navigations/MobileNavigations';
 import { retrieveDataDetailsSurah } from '@/lib/RestApi/SurahApi/Service';
-import AppLayout from '@/Layout/App';
 
 const SurahDetail = () => {
     const router = useRouter();

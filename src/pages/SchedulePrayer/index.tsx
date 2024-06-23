@@ -6,12 +6,10 @@ import { retrieveUserLocations } from "@/lib/Locations/LocationServices";
 import { getCoordinatesUser } from "@/lib/Locations/LocationsProviders";
 import SkeletonLoading from "@/Components/Loading/SkeletonLoading";
 import MobileNavigations from "@/UI/Navigations/MobileNavigations";
-import { getDisplayName } from "next/dist/shared/lib/utils";
 
 const FeatSchedulePrayer = () => {
     const { systemTheme, theme } = useTheme();
     const [currentDate] = useState(new Date());
-
 
     const currentDateInfo = {
         day: currentDate.getDate(),

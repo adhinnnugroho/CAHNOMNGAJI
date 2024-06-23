@@ -2,7 +2,6 @@ import BorderCard from "@/Components/Card/BorderCard";
 import SearchInput from "@/Components/Input/SearchInput";
 import MobileNavigations from "@/UI/Navigations/MobileNavigations"
 import { retrieveAllDoa } from "@/lib/Doa/DoaLib";
-import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 
 const DoaScreen = () => {
