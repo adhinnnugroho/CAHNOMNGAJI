@@ -15,7 +15,7 @@ const LastReadSurah = () => {
     }, []);
     return (
         <>
-            <div className="ml-4 mr-4 mt-3 mb-32">
+            <div className="ml-4 mr-4 mt-3 mb-44">
                 <Image src={LastReadBackground} priority={true} width={330} height={60} alt="ramadhan"
                     className="w-screen h-44" />
                 <div className="flex flex-warp gap-1 -mt-40 ml-3">
