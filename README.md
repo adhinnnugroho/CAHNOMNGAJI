@@ -5,7 +5,7 @@ Cahenom Ngaji is a web application for reading the Qur'an, displaying prayer tim
 ## Features
 
 - Displaying a list of surahs
-- Displaying surah details
+- Displaying surah detail
 - Displaying prayer times based on user location
 - Displaying daily prayers
 - Responsive and user-friendly user interface
