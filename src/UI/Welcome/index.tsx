@@ -6,7 +6,7 @@ const WelcomeScreen = () => {
     return (
         <div className="text-center">
             <h5 className="text-indigo-700 text-3xl font-bold mt-10">
-                Ramadhan Projects
+                CAHENOMNGAJI
             </h5>
             <p className="text-indigo-500 text-xl mt-2">
                 Learn Quran and Recite once everyday
