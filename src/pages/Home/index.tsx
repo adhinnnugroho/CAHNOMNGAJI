@@ -10,7 +10,7 @@ const HomeScreen = () => {
     const [surah, setSurah] = useState([])
     const [loadedDataCount, setLoadedDataCount] = useState(5);
     const [totalDataCount, setTotalDataCount] = useState(0);
-    const [SearchParam, setSearchParam] = useState('');
+    const [searchParam, setSearchParam] = useState('');
 
 
     const getSurah = useCallback(async () => {
@@ -56,20 +56,16 @@ const HomeScreen = () => {
         }
     }
 
-    const filteredSurahs = surah && surah.filter((surah: any) =>
-        surah.namaLatin.toLowerCase().includes(SearchParam.toLowerCase())
+    const filteredSurahs = surah?.filter((surah: any) =>
+        surah.namaLatin.toLowerCase().includes(searchParam.toLowerCase())
     );
-
-    useEffect(() => {
-        filteredSurahs
-    }, [filteredSurahs]);
 
 
     return (
         <AppLayout>
-            <>
+            <div className="lg:hidden block">
                 <LastReadSurah />
-                <div className="mt-5 ml-4 mr-4 mb-5">
+                <div className="mt-5 ml-4 mr-4 mb-5 ">
                     <div className="grid grid-cols-3 gap-7">
                         <div className="col-span-1 text-2xl text-purple-600 font-bold">
                             Surah
@@ -82,7 +78,7 @@ const HomeScreen = () => {
                     <div className="grid grid-cols-1 gap-5 ml-2 mr-2 mt-10 pb-16">
                         {filteredSurahs.map((surah: any, index: number) => {
                             return (
-                                <div key={index}>
+                                <div key={"surah" + index}>
                                     <SurahCard SurahNumber={surah.nomor} SurahNameLatin={surah.namaLatin} tempatTurun={surah.tempatTurun}
                                         link={`/Surah/${surah.nomor}`} jumlahAyat={surah.jumlahAyat} SurahNameTransliteration={surah.nama} />
                                 </div>
@@ -90,7 +86,7 @@ const HomeScreen = () => {
                         })}
                     </div>
                 </div>
-            </>
+            </div>
         </AppLayout>
     )
 }
