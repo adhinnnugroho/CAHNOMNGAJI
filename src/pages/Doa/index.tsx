@@ -5,7 +5,7 @@ import { retrieveAllDoa } from "@/lib/Doa/DoaLib";
 import { useCallback, useEffect, useState } from "react";
 
 const DoaScreen = () => {
-    const [Doa, setDoa] = useState([])
+    const [doa, setDoa] = useState([])
     const [loadedDataCount, setLoadedDataCount] = useState(10);
     const [totalDataCount, setTotalDataCount] = useState(0);
     const getAllDoa = useCallback(async () => {
@@ -14,7 +14,7 @@ const DoaScreen = () => {
         setDoa(responseDoa.slice(0, loadedDataCount));
     }, [loadedDataCount]);
 
-    const [SearchParam, setSearchParam] = useState('');
+    const [searchParam, setSearchParam] = useState('');
 
     useEffect(() => {
         getAllDoa();
@@ -54,13 +54,10 @@ const DoaScreen = () => {
         }
     }
 
-    const filteredDoa = Doa && Doa.filter((doa: any) =>
-        doa.judul.toLowerCase().includes(SearchParam.toLowerCase())
+    const filteredDoa = doa?.filter((doa: any) =>
+        doa.judul.toLowerCase().includes(searchParam.toLowerCase())
     );
 
-    useEffect(() => {
-        filteredDoa
-    }, [filteredDoa]);
 
 
     return (
@@ -80,7 +77,7 @@ const DoaScreen = () => {
             <div className="grid grid-cols-1 gap-5 ml-2 mr-2 mt-10 pb-16">
                 {filteredDoa.map((Doa: any, index: number) => {
                     return (
-                        <div key={index}>
+                        <div key={"doa" + index}>
                             <BorderCard title={Doa.judul} subtitle={Doa.arab} className="col-span-1 text-left p-3" />
                         </div>
                     )

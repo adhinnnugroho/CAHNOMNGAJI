@@ -15,7 +15,7 @@ export async function retrieveDataSurah() {
     return DataSurah.data.data;
 }
 
-export async function retrieveDataDetailsSurah(SurahId: String) {
+export async function retrieveDataDetailsSurah(SurahId: string) {
     const DataSurah = await SurahService.getDetailsSurah(SurahId);
     return DataSurah.data.data;
 }
