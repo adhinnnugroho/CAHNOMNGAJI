@@ -66,7 +66,7 @@ const SurahDetail = () => {
                 lastReadTime: new Date().getTime()
             };
             localStorage.setItem('lastRead', JSON.stringify(lastReadData));
-            const timeout = setTimeout(saveLastRead, 5000);
+            const timeout = setTimeout(saveLastRead, 1000);
             return () => clearTimeout(timeout);
         };
     });
