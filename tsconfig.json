@@ -17,6 +17,10 @@
       "@/img/*": ["./public/img/*"],
       "@/icons/*": ["./public/img/icons/*"],
       "@/public/*": ["./public/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/hooks/*": ["./src/hooks/*"],
+      "@/lib/*": ["./src/core/lib/*"],
+      "@/services/*": ["./src/services/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

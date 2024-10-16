@@ -1,5 +1,0 @@
-rest api for list surah
-https://equran.id/api/v2/surat
-
-rest api untuk detail surah 
-https://equran.id/api/v2/surat/1

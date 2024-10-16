@@ -1,2 +1,0 @@
-documentasi next js
-https://nextjs.org/

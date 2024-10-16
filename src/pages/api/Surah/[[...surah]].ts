@@ -1,4 +1,5 @@
-import { retrieveData, retrieveDataByid } from "@/lib/RestApi/SurahApi/Service";
+
+import { retrieveAllDataSurah, retrieveDataSurahByid } from "@/core/utils/SurahUtils";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -12,7 +13,8 @@ export default async function handler(
     try {
         const { surah }: any = req.query;
         const SurahId = surah ? surah[1] : null;
-        const data = SurahId ? await retrieveDataByid(SurahId) : await retrieveData();
+        const data = SurahId ? await retrieveDataSurahByid(SurahId) : await retrieveAllDataSurah();
+    
         res.status(200).json({
             status: true,
             statusCode: 200,
