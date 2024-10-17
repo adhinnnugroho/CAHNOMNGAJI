@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import NavCard from "@/components/card/NavCard";
 
 import {
     HomeIcons,
@@ -11,6 +10,7 @@ import {
 } from "@/core/constants/icons";
 
 import useToggleTheme from "@/core/hooks/useToggleThemes";
+import NavCard from "../Card/NavCard";
 
 const MobileNavigations = () => {
     const route = useRouter();
