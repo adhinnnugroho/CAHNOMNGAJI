@@ -1,9 +1,9 @@
-import instance from "@/lib/axios/instance";
+import instance from "@/core/lib/axios/instance";
 
 
 const SurahService = {
-    getAllSurah: () => instance.get('/api/Surah/surah'),
-    getDetailsSurah: (id: String) => instance.get(`/api/Surah/surah/${id}`),
+    getAllSurah: () => instance.get('/api/surah/surah'),
+    getDetailsSurah: (id: number) => instance.get(`/api/surah/surah/${id}`),
 }
 
 export default SurahService;

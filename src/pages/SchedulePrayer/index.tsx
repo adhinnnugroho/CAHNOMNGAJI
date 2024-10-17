@@ -5,7 +5,7 @@ import { retrieveScheduleSholatDaily, retrieveSpecificCityData } from "@/lib/Sch
 import { retrieveUserLocations } from "@/lib/Locations/LocationServices";
 import { getCoordinatesUser } from "@/lib/Locations/LocationsProviders";
 import SkeletonLoading from "@/Components/Loading/SkeletonLoading";
-import MobileNavigations from "@/UI/Navigations/MobileNavigations";
+import MobileNavigations from "@/components/navigations/MobileNavigations";
 
 const FeatSchedulePrayer = () => {
     const { systemTheme, theme } = useTheme();

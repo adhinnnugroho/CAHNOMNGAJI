@@ -1,6 +1,7 @@
-import SimpleButton from "@/Components/Button/SimpleButton"
+
 import Image from "next/image"
 import ImageManagement from "@/public/ImageManagement"
+import SimpleButton from "@/components/button/SimpleButton"
 
 const WelcomeScreen = () => {
     return (
@@ -14,12 +15,11 @@ const WelcomeScreen = () => {
 
             <div className="relative mt-5">
                 <Image src={ImageManagement.loading} width={330} height={60} alt="ramadhan" className="mx-auto" />
-                <SimpleButton type="button" link={"/Home"} rounded="rounded-full"
+                <SimpleButton type="button" link={"/home"} rounded="rounded-full"
                     className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2  bg-yellow-700 text-white w-60 px-5 py-3">
                     Get Started
                 </SimpleButton>
             </div>
-
         </div>
     )
 }

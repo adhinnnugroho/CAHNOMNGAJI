@@ -1,6 +1,6 @@
-import NavCard from "@/Components/Card/NavCard";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
+import NavCard from "../card/NavCard";
 
 
 const HomeIcons = "img/icons/HomeIcon.png";

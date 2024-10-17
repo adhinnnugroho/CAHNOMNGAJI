@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import BackNavigations from '@/UI/Navigations/BackNavigations';
+import BackNavigations from '@/components/navigations/BackNavigations';
 import SurahDetails from '@/Components/Card/SurahDetails';
 import { retrieveDataDetailsSurah } from '@/lib/RestApi/SurahApi/Service';
 

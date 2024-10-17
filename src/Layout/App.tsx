@@ -1,6 +1,6 @@
-import BackNavigations from "@/UI/Navigations/BackNavigations"
-import MobileNavigations from "@/UI/Navigations/MobileNavigations"
-import Navigations from "@/UI/Navigations/Navigations"
+import BackNavigations from "@/components/navigations/BackNavigations"
+import MobileNavigations from "@/components/navigations/MobileNavigations"
+import Navigations from "@/components/navigations/Navigations"
 import { useEffect } from "react"
 
 type propType = {

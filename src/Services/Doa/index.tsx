@@ -1,4 +1,4 @@
-import instance from "@/lib/axios/instance";
+import instance from "@/core/lib/axios/instance";
 
 const DoaServices = {
     getAllDoa: () =>

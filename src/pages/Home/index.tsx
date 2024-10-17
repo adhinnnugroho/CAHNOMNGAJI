@@ -1,12 +1,11 @@
-import SurahCard from "@/Components/Card/SurahCard"
-import SearchInput from "@/Components/Input/SearchInput"
-import AppLayout from "@/Layout/App"
-import LastReadSurah from "@/UI/Home/LastRead"
+import SurahCard from "@/components/card/SurahCard"
+import SearchInput from "@/components/input/SearchInput"
+import AppLayout from "@/layout/App"
 import { retrieveDataSurah } from "@/lib/RestApi/SurahApi/Service"
+import LastReadSurahScreen from "@/screen/homeScreen/lastReadScreen"
 import { useCallback, useEffect, useState } from "react"
 
 const HomeScreen = () => {
-
     const [surah, setSurah] = useState([])
     const [loadedDataCount, setLoadedDataCount] = useState(5);
     const [totalDataCount, setTotalDataCount] = useState(0);
@@ -64,7 +63,7 @@ const HomeScreen = () => {
     return (
         <AppLayout>
             <div className="lg:hidden block">
-                <LastReadSurah />
+                <LastReadSurahScreen />
                 <div className="mt-5 ml-4 mr-4 mb-5 ">
                     <div className="grid grid-cols-3 gap-7">
                         <div className="col-span-1 text-2xl text-purple-600 font-bold">
