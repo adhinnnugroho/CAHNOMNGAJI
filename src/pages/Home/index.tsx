@@ -1,64 +1,10 @@
-import SurahCard from "@/components/card/SurahCard"
-import SearchInput from "@/components/input/SearchInput"
 import AppLayout from "@/layout/App"
-import { retrieveDataSurah } from "@/lib/RestApi/SurahApi/Service"
+import useSurahData from "@/core/hooks/surah/useSurahData"
 import LastReadSurahScreen from "@/core/screen/homeScreen/lastReadScreen"
-import { useCallback, useEffect, useState } from "react"
+import ComponentManagement from "@/components/ComponentManagement"
 
 const HomeScreen = () => {
-    const [surah, setSurah] = useState([])
-    const [loadedDataCount, setLoadedDataCount] = useState(5);
-    const [totalDataCount, setTotalDataCount] = useState(0);
-    const [searchParam, setSearchParam] = useState('');
-
-
-    const getSurah = useCallback(async () => {
-        const responseSurah = await retrieveDataSurah();
-        setTotalDataCount(responseSurah.length);
-        setSurah(responseSurah.slice(0, loadedDataCount));
-    }, [loadedDataCount]);
-
-    useEffect(() => {
-        getSurah();
-    }, [getSurah]);
-
-    const loadMoreData = async () => {
-        setLoadedDataCount(prevCount => prevCount + 5);
-    };
-
-    const handleScroll = useCallback(() => {
-        const scrollTop = document.documentElement.scrollTop;
-        const scrollHeight = document.documentElement.scrollHeight;
-        const clientHeight = document.documentElement.clientHeight;
-
-        if (scrollTop + clientHeight >= scrollHeight && loadedDataCount < totalDataCount) { loadMoreData(); } else if
-            (scrollTop === 0 && loadedDataCount > 5) {
-            setLoadedDataCount(5);
-        }
-    }, [loadedDataCount, totalDataCount]);
-
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, [handleScroll]);
-
-    const HandleRealtimeSearch = async (SearchValue: any) => {
-        const responseSurah = await retrieveDataSurah();
-        if (SearchValue === '') {
-            setSearchParam(SearchValue)
-            setSurah(responseSurah.slice(0, loadedDataCount));
-        } else {
-            setSearchParam(SearchValue)
-            setSurah(responseSurah);
-        }
-    }
-
-    const filteredSurahs = surah?.filter((surah: any) =>
-        surah.namaLatin.toLowerCase().includes(searchParam.toLowerCase())
-    );
-
+    const { filteredSurahs, handleSearch } = useSurahData();
 
     return (
         <AppLayout>
@@ -70,7 +16,7 @@ const HomeScreen = () => {
                             Surah
                         </div>
                         <div className="col-span-2 text-3xl text-right mr-3 relative">
-                            <SearchInput onChange={(e) => HandleRealtimeSearch(e.target.value)} />
+                            <ComponentManagement.SearchInput onChange={(e) => handleSearch(e.target.value)} />
                         </div>
                     </div>
 
@@ -78,7 +24,7 @@ const HomeScreen = () => {
                         {filteredSurahs.map((surah: any, index: number) => {
                             return (
                                 <div key={"surah" + index}>
-                                    <SurahCard SurahNumber={surah.nomor} SurahNameLatin={surah.namaLatin} tempatTurun={surah.tempatTurun}
+                                    <ComponentManagement.SurahCard SurahNumber={surah.nomor} SurahNameLatin={surah.namaLatin} tempatTurun={surah.tempatTurun}
                                         link={`/Surah/${surah.nomor}`} jumlahAyat={surah.jumlahAyat} SurahNameTransliteration={surah.nama} />
                                 </div>
                             )

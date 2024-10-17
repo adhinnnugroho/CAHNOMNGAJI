@@ -19,7 +19,7 @@ const MobileNavigations = () => {
     if (!mounted) return null;
 
     return (
-        <div className="dark:bg-black fixed bottom-0  w-full border border-transparent dark:border-t-gray-400 border-t-gray-400 p-2 ">
+        <div className="dark:bg-black bg-white  transition-all duration-700 ease-in-out fixed bottom-0  w-full border border-transparent dark:border-t-gray-400 border-t-gray-400 p-2 ">
             <div className="grid grid-cols-4 gap-3 ml-5">
                 <div className="col-span-1 text-center ">
                     <NavCard icon={HomeIcons} active_icons={HomeIconsActive} status_link={route.pathname === "/home"}

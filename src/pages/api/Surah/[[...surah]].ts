@@ -1,4 +1,4 @@
-import { retrieveData, retrieveDataByid } from "@/lib/RestApi/SurahApi/Service";
+import { getData, getDataById } from "@/services/ApiServices";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -10,14 +10,17 @@ export default async function handler(
     }
 
     try {
+        const endpoint = `${process.env.REST_API_URL}`;
         const { surah }: any = req.query;
         const SurahId = surah ? surah[1] : null;
-        const data = SurahId ? await retrieveDataByid(SurahId) : await retrieveData();
+        const SurahResponse = SurahId ? await getDataById(endpoint,SurahId) : await getData(endpoint);
+        const SurahData = SurahResponse.data;
+
         res.status(200).json({
             status: true,
             statusCode: 200,
             message: "Surah retrieved data successfully",
-            data:  data.data.data
+            data:  SurahData.data
         });
     } catch (error) {
         console.error("Error while fetching data:", error);

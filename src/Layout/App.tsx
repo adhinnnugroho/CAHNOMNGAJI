@@ -17,7 +17,7 @@ const AppLayout = ({ children, NavigationType, linkNavigation, NavbarTitle, titl
         document.title = title ?? 'CAHNOMNGAJI'
     })
     return (
-        <div className="dark:bg-black bg-gray-100">
+        <div className="dark:bg-black bg-gray-100  transition-all duration-700 ease-in-out">
             <div className="lg:hidden block">
                 {NavigationType === "Back" ? <BackNavigations SurahName={NavbarTitle} link={linkNavigation} /> : <Navigations />}
             </div>

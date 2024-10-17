@@ -9,24 +9,26 @@ type PropsType = {
 const BackNavigations = (props: PropsType) => {
     const { SurahName, link } = props;
     return (
-        <nav className="dark:bg-gray-800 bg-gray-100">
-            <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-                <div className="relative flex h-16 items-center justify-between">
-                    <Link href={link ? link.toString() : '/'} >
-                        <div className="justify-start text-2xl font-semibold flex flex-nowrap">
-                            <i className='bx bx-left-arrow-alt text-4xl mr-2'></i>
-                            <div className="dark:text-white text-purple-600">
-                                {SurahName}
-                            </div>
+        <nav className="dark:bg-black bg-gray-100 border border-transparent border-b-gray-600 p-2">
+            <div className="grid grid-cols-3 gap-5 items-center">
+                <div className="col-span-1 flex items-center">
+                    <Link href={link ? link.toString() : '/'}>
+                        <div className="justify-start text-2xl font-semibold flex">
+                            <i className='bx bx-chevron-left text-4xl font-bold mr-2'></i>
                         </div>
                     </Link>
-
-                    {/* <div className="justify-end">
-                        <i className='bx bx-search text-3xl mt-1 mr-2'></i>
-                    </div> */}
                 </div>
+
+                <div className="col-span-1 flex justify-center items-center">
+                    <h1 className="dark:text-white text-purple-600 font-semibold text-xl">
+                        {SurahName}
+                    </h1>
+                </div>
+
+                <div className="col-span-1"></div>
             </div>
         </nav>
+
     )
 }
 

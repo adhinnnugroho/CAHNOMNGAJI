@@ -3,7 +3,7 @@ import {
     lastReadBackground
 } from "@/core/constants/background";
 
-import useLastReadSurah from "@/core/hooks/useLastReadSurah";
+import useLastReadSurah from "@/core/hooks/surah/useLastReadSurah";
 
 const LastReadSurahScreen = () => {
     const { lastReadSurah } = useLastReadSurah();
