@@ -2,7 +2,7 @@ import SurahCard from "@/components/card/SurahCard"
 import SearchInput from "@/components/input/SearchInput"
 import AppLayout from "@/layout/App"
 import { retrieveDataSurah } from "@/lib/RestApi/SurahApi/Service"
-import LastReadSurahScreen from "@/screen/homeScreen/lastReadScreen"
+import LastReadSurahScreen from "@/core/screen/homeScreen/lastReadScreen"
 import { useCallback, useEffect, useState } from "react"
 
 const HomeScreen = () => {

@@ -17,7 +17,7 @@ const NavCard = (prop: PropsType) => {
     const ActiveIcon = status_link ? active_icons : icon;
 
 
-    if (type_icons == "text") {
+    if (type_icons === "text") {
         return (
             <div>
                 <Link href={link ? link.toString() : '/'} >
@@ -27,18 +27,15 @@ const NavCard = (prop: PropsType) => {
                 </Link>
             </div>
         )
-    } else if (type_icons == "img") {
-
-        return (
-            <div>
-                <Link href={link ? link.toString() : '/'} >
-                    <Image src={`/${ActiveIcon}`} width={40} height={40} alt="ramadhan" />
-                </Link>
-            </div>
-        )
-    } else {
-        return null;
     }
+
+    return (
+        <div>
+            <Link href={link ? link.toString() : '/'} >
+                <Image src={`/${ActiveIcon}`} width={40} height={40} alt="ramadhan" />
+            </Link>
+        </div>
+    )
 }
 
 export default NavCard

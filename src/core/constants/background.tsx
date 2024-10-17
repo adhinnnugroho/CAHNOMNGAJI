@@ -1,0 +1,1 @@
+export const lastReadBackground = '/img/last_read.png'

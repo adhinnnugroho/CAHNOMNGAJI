@@ -18,6 +18,7 @@
       "@/icons/*": ["./public/img/icons/*"],
       "@/public/*": ["./public/*"],
       "@/components/*": ["./src/components/*"],
+      "@/hooks/*": ["./src/core/hooks/*"],
       "@/core/*": ["./src/core/*"],
     }
   },

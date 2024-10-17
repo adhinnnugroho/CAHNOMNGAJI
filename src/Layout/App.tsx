@@ -11,8 +11,7 @@ type propType = {
     'title'?: string
 }
 
-const AppLayout = (prop: propType) => {
-    const { children, NavigationType, linkNavigation, NavbarTitle, title } = prop
+const AppLayout = ({ children, NavigationType, linkNavigation, NavbarTitle, title }: propType) => {
 
     useEffect(() => {
         document.title = title ?? 'CAHNOMNGAJI'

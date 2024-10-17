@@ -1,4 +1,4 @@
-import WelcomeScreen from "@/screen/welcomeScreen";
+import WelcomeScreen from "@/core/screen/welcomeScreen";
 
 export default function Home() {
   return (
