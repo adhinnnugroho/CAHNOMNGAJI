@@ -1,4 +1,5 @@
-import { retrieveDataScheduleSholatMonthly } from "@/lib/RestApi/ScheduleSholat/Service";
+
+import { retrieveDataScheduleSholatMonthly } from "@/core/utils/ScheduleSholatUtils/scheduleSholatHelper";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(

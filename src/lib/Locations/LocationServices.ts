@@ -1,4 +1,4 @@
-import SholatServices from "@/Services/Sholat";
+import SholatServices from "@/services/Sholat";
 
 export async function retrieveUserLocations(latitude: number, longitude: number) {
     try {

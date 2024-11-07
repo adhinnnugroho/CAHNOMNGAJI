@@ -1,4 +1,4 @@
-import SholatServices from "@/Services/Sholat";
+import SholatServices from "@/services/Sholat";
 
 export async function retrieveSpecificCityData(city: string) {
     try {
@@ -15,7 +15,7 @@ export async function retrieveSpecificCityData(city: string) {
 export async function retrieveScheduleSholatDaily(cityId: number, year: number, month: number, date: number) {
 
     try {
-        const scheduleSholatResponse  = await SholatServices.getScheduleSholatDaily(cityId, year, month, date);
+        const scheduleSholatResponse = await SholatServices.getScheduleSholatDaily(cityId, year, month, date);
         const GetDataDailyScheduleSholat = scheduleSholatResponse.data.data.data;
         return GetDataDailyScheduleSholat;
     } catch (error) {

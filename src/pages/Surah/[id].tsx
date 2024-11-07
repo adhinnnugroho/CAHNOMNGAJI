@@ -1,7 +1,8 @@
-import SurahDetails from '@/components/card/SurahDetails';
+
 import AppLayout from '@/layout/App';
 import useSurahDetail from '@/core/hooks/surah/useSurahDetails';
-import SurahDetailsCard from '@/components/card/SurahDetailsCard';
+import SurahDetails from '@/components/Card/SurahDetails';
+import SurahDetailsCard from '@/components/Card/SurahDetailsCard';
 
 const SurahDetail = () => {
     const {

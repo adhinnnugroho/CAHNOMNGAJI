@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
-import ScheduleCard from "@/Components/Card/ScheduleCard";
+import ScheduleCard from "@/components/Card/ScheduleCard";
 import { retrieveScheduleSholatDaily, retrieveSpecificCityData } from "@/lib/Schedule/ScheduleServices";
 import { retrieveUserLocations } from "@/lib/Locations/LocationServices";
 import { getCoordinatesUser } from "@/lib/Locations/LocationsProviders";
-import SkeletonLoading from "@/Components/Loading/SkeletonLoading";
+import SkeletonLoading from "@/components/Loading/SkeletonLoading";
 import MobileNavigations from "@/components/navigations/MobileNavigations";
 
 const FeatSchedulePrayer = () => {

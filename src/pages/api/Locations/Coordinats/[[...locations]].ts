@@ -1,4 +1,5 @@
-import { retrieveDataSpecificNameCity } from "@/lib/RestApi/ScheduleSholat/Service";
+
+import { retrieveDataSpecificNameCity } from "@/core/utils/ScheduleSholatUtils/scheduleSholatHelper";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(

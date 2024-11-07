@@ -1,5 +1,6 @@
-import BorderCard from "@/Components/Card/BorderCard";
-import SearchInput from "@/Components/Input/SearchInput";
+
+import BorderCard from "@/components/Card/BorderCard";
+import SearchInput from "@/components/Input/SearchInput";
 import MobileNavigations from "@/components/navigations/MobileNavigations"
 import { retrieveAllDoa } from "@/lib/Doa/DoaLib";
 import { useCallback, useEffect, useState } from "react";

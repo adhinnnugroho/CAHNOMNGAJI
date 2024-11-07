@@ -1,4 +1,4 @@
-import SurahService from "@/services/surah";
+import SurahService from "@/services/Surah";
 
 export async function retrieveDataSurah() {
     const DataSurah = await SurahService.getAllSurah();
