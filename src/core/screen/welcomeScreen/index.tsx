@@ -1,7 +1,7 @@
 
 import Image from "next/image"
 import ImageManagement from "@/public/ImageManagement"
-import SimpleButton from "@/components/button/SimpleButton"
+import SimpleButton from "@/components/Button/SimpleButton"
 
 const WelcomeScreen = () => {
     return (
